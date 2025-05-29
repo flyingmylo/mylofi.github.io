@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on ⚽️</title>
+    <link>http://mylofi.fun/tags/</link>
+    <description>Recent content in Tags on ⚽️</description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 12 Nov 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://mylofi.fun/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Database</title>
+      <link>http://mylofi.fun/tags/database/</link>
+      <pubDate>Sun, 12 Nov 2023 00:00:00 +0000</pubDate>
+      <guid>http://mylofi.fun/tags/database/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Java</title>
+      <link>http://mylofi.fun/tags/java/</link>
+      <pubDate>Sun, 12 Nov 2023 00:00:00 +0000</pubDate>
+      <guid>http://mylofi.fun/tags/java/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Nginx</title>
+      <link>http://mylofi.fun/tags/nginx/</link>
+      <pubDate>Tue, 28 Mar 2023 20:54:28 +0800</pubDate>
+      <guid>http://mylofi.fun/tags/nginx/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Git</title>
+      <link>http://mylofi.fun/tags/git/</link>
+      <pubDate>Tue, 20 Dec 2022 17:03:14 +0800</pubDate>
+      <guid>http://mylofi.fun/tags/git/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Notes</title>
+      <link>http://mylofi.fun/tags/notes/</link>
+      <pubDate>Wed, 13 Jul 2022 21:27:03 +0800</pubDate>
+      <guid>http://mylofi.fun/tags/notes/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>算法</title>
+      <link>http://mylofi.fun/tags/%E7%AE%97%E6%B3%95/</link>
+      <pubDate>Thu, 07 Jul 2022 21:27:33 +0800</pubDate>
+      <guid>http://mylofi.fun/tags/%E7%AE%97%E6%B3%95/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>翻译</title>
+      <link>http://mylofi.fun/tags/%E7%BF%BB%E8%AF%91/</link>
+      <pubDate>Sat, 28 May 2022 17:27:11 +0800</pubDate>
+      <guid>http://mylofi.fun/tags/%E7%BF%BB%E8%AF%91/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

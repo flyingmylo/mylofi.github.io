@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+  dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+<link rel="icon" type="image/ico" href="http://mylofi.fun/static/favicon.ico/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://mylofi.fun/static/favicon.ico/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://mylofi.fun/static/favicon.ico/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="http://mylofi.fun/static/favicon.ico/android-chrome-192x192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="http://mylofi.fun/static/favicon.ico/apple-touch-icon.png">
+
+<meta name="description" content=""/>
+
+
+
+<title>
+    
+    清理 Git 文件夹过期引用 | ⚽️
+    
+</title>
+
+<link rel="canonical" href="http://mylofi.fun/posts/git-slim/"/>
+
+<meta property="og:url" content="http://mylofi.fun/posts/git-slim/">
+  <meta property="og:site_name" content="⚽️">
+  <meta property="og:title" content="清理 Git 文件夹过期引用">
+  <meta property="og:description" content="Git 版本仓库提交过多，会导致项目根目录下的 .git 文件夹体积巨大，原因可能不只是单纯的提交历史过多，而是历史提交中包含有对大文件的引用，即使现在的项目中已经不存在这些文件了，但其引用关联依旧会被 git 保留下来。
+踩坑方案一 # git filter-branch 命令可以改写历史中大量的提交，但是它有很多陷阱，而且官方文档中已经不推荐使用它来重写历史了，当然，这个坑是我踩过之后才知道的。
+识别查询大文件 # 找到项目根目录下的 .idx 文件，路径：
+.git/objects/pack/pack-************.idx
+执行：
+git rev-list --objects --all | grep -f &lt;(git verify-pack -v .git/objects/pack/******.idx| sort -k 3 -n | cut -f 1 -d &#34; &#34; | tail -10)
+运行结果大致如下：
+c0b33abdf3af4f0a4ae82d6243954eeb344432d9 src/components/Emoji/emoji.png a08b3b0f766d26729cbaf0b7e86212b0ca4a5569 dist/js/2a10361c.async.js 1d26f0da81c885c676badb026367a47183013fb5 dist/js/84ad94bf.async.js eb07071cdea7e019953a3a6778a4bb6e728ea13d dist/js/4922a65f.async.js 7ddf057a0e26f300137c84cf03dbe088a69da488 dist/js/62f9d99c.async.js 删除文件 # 将该文件从历史记录的所有 tree 中移除，执行：
+git filter-branch --index-filter &#39;git rm --cached --ignore-unmatch src/components/Emoji/emoji.png&#39;">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2022-12-20T17:03:14+08:00">
+    <meta property="article:modified_time" content="2022-12-20T17:03:14+08:00">
+    <meta property="article:tag" content="Git">
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/assets/combined.min.04fb0b353b0d1d2950e7fec6d105b7e72b3ec97dd6e8d4e77c0aebdf0715425b.css" media="all">
+
+
+
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-xxxxxxxxx"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-xxxxxxxxx');
+        }
+      </script>
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+</head>
+
+
+
+
+
+
+
+<body class="auto">
+
+  <div class="content">
+    <header>
+      
+
+<div class="header">
+
+    
+
+</div>
+
+    </header>
+
+    <main class="main">
+      
+
+
+
+
+<div class="breadcrumbs"><a href="/">Home</a><span class="breadcrumbs-separator">/</span><a href="/posts/">Posts</a><span class="breadcrumbs-separator">/</span>
+        <a href="/posts/git-slim/">清理 Git 文件夹过期引用</a></div>
+
+
+<div >
+  <article>
+    <header class="single-intro-container">
+        
+        <h1 class="single-title">清理 Git 文件夹过期引用</h1>
+        
+        <div class="single-subsummary">
+          
+          <div>
+            
+            <p class="single-date">
+              <time datetime="2022-12-20T17:03:14&#43;08:00">December 20, 2022</time>
+            </p>
+          </div>
+        </div>
+        
+    </header>
+    
+    <div class="single-content">
+      <p>Git 版本仓库提交过多，会导致项目根目录下的 <code>.git</code> 文件夹体积巨大，原因可能不只是单纯的提交历史过多，而是历史提交中包含有对大文件的引用，即使现在的项目中已经不存在这些文件了，但其引用关联依旧会被 <code>git</code> 保留下来。</p>
+<h2 class="heading" id="踩坑方案一">
+  踩坑方案一
+  <a class="anchor" href="#%e8%b8%a9%e5%9d%91%e6%96%b9%e6%a1%88%e4%b8%80">#</a>
+</h2>
+<p><code>git filter-branch</code> 命令可以改写历史中大量的提交，但是它有很多陷阱，而且官方文档中已经不推荐使用它来重写历史了，当然，这个坑是我踩过之后才知道的。</p>
+<h3 class="heading" id="识别查询大文件">
+  识别查询大文件
+  <a class="anchor" href="#%e8%af%86%e5%88%ab%e6%9f%a5%e8%af%a2%e5%a4%a7%e6%96%87%e4%bb%b6">#</a>
+</h3>
+<p>找到项目根目录下的 <code>.idx</code> 文件，路径：</p>
+<blockquote>
+<p><code>.git/objects/pack/pack-************.idx</code></p></blockquote>
+<p>执行：</p>
+<blockquote>
+<p><code>git rev-list --objects --all | grep -f &lt;(git verify-pack -v  .git/objects/pack/******.idx| sort -k 3 -n | cut -f 1 -d &quot; &quot; | tail -10)</code></p></blockquote>
+<p>运行结果大致如下：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>c0b33abdf3af4f0a4ae82d6243954eeb344432d9 src/components/Emoji/emoji.png
+</span></span><span style="display:flex;"><span>a08b3b0f766d26729cbaf0b7e86212b0ca4a5569 dist/js/2a10361c.async.js
+</span></span><span style="display:flex;"><span>1d26f0da81c885c676badb026367a47183013fb5 dist/js/84ad94bf.async.js
+</span></span><span style="display:flex;"><span>eb07071cdea7e019953a3a6778a4bb6e728ea13d dist/js/4922a65f.async.js
+</span></span><span style="display:flex;"><span>7ddf057a0e26f300137c84cf03dbe088a69da488 dist/js/62f9d99c.async.js
+</span></span></code></pre></div><h3 class="heading" id="删除文件">
+  删除文件
+  <a class="anchor" href="#%e5%88%a0%e9%99%a4%e6%96%87%e4%bb%b6">#</a>
+</h3>
+<p>将该文件从历史记录的所有 tree 中移除，执行：</p>
+<blockquote>
+<p><code>git filter-branch --index-filter 'git rm --cached --ignore-unmatch  src/components/Emoji/emoji.png'</code></p></blockquote>
+<p>注：需要依次执行该命令去删除这些大文件，可能会有很多 <code>jpg/js.map/gif</code> 等类型的文件。</p>
+<h3 class="heading" id="推送到远程">
+  推送到远程
+  <a class="anchor" href="#%e6%8e%a8%e9%80%81%e5%88%b0%e8%bf%9c%e7%a8%8b">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>rm -rf .git/refs/original/
+</span></span><span style="display:flex;"><span>git reflog expire --expire=now --all
+</span></span><span style="display:flex;"><span>git fsck --full --unreachable 
+</span></span><span style="display:flex;"><span>git repack -A -d
+</span></span><span style="display:flex;"><span>git gc --aggressive --prune=now
+</span></span><span style="display:flex;"><span>git push --force
+</span></span></code></pre></div><p>依次执行完以上命令后，此时去检查远程仓库，结果令人诧异，居然&hellip;没有&hellip;生效&hellip;本地确实是清理掉了一部分空间，从 <code>1.2G</code> 瘦身到 <code>600M</code> 左右，但是推送后并没有作用，于是继续寻找其他方案，结果看到 <a href="https://stackoverflow.com/questions/2100907/how-to-remove-delete-a-large-file-from-commit-history-in-the-git-repository?answertab=modifieddesc&amp;newreg=adaec4ffc87445179ca5946bf95f0109#tab-top">stackoverflow</a> 上有一个一摸一样的问题，按 <code>Date modified (newest first)</code> 排序之后，看到👇
+
+
+
+
+
+
+
+
+
+
+
+
+<figure class="">
+
+    <div class="img-container" >
+        <img loading="lazy" alt="" src="/images/git-slim/1.png" >
+    </div>
+
+    
+    <div class="caption-container">
+        <figcaption>  </figcaption>
+    </div>
+    
+</figure>
+
+也就是说 2022 了，<code>git filter-branch</code> 已经不好使了，推送到远程之后没有任何作用，方案一以失败告状。</p>
+<h2 class="heading" id="终极方案二">
+  终极方案二
+  <a class="anchor" href="#%e7%bb%88%e6%9e%81%e6%96%b9%e6%a1%88%e4%ba%8c">#</a>
+</h2>
+<p><code>git</code> 官方文档推荐了这个库： <a href="https://github.com/newren/git-filter-repo">git-filter-pro</a> ，它是一个可以重写 git 历史的多功能 <code>Python</code> 脚本，即使现在在项目当中找不到那些历史文件，它依然可以找到它们并进行清理（看来这才是我想要的东西）。</p>
+<h3 class="heading" id="安装">
+  安装
+  <a class="anchor" href="#%e5%ae%89%e8%a3%85">#</a>
+</h3>
+<blockquote>
+<p><code>brew install git-filter-repo</code></p></blockquote>
+<p>❌ 报错</p>
+<blockquote>
+<p><code>No such file or directory @ rb_sysopen -xxxxx</code></p></blockquote>
+<p>✅ 解决方案</p>
+<blockquote>
+<p>原因是使用国内镜像但是该镜像未完全同步的问题，临时去除镜像即可：
+<code>export HOMEBREW_BOTTLE_DOMAIN=''</code></p></blockquote>
+<h3 class="heading" id="使用">
+  使用
+  <a class="anchor" href="#%e4%bd%bf%e7%94%a8">#</a>
+</h3>
+<p>这里可以搭配此命令来找到那些历史中的大文件，然后逐一清理。</p>
+<blockquote>
+<p><code>git rev-list --objects --all | grep -f &lt;(git verify-pack -v  .git/objects/pack/******.idx| sort -k 3 -n | cut -f 1 -d &quot; &quot; | tail -10)</code></p></blockquote>
+<p>假设要清理全部的 <code>*.jpg</code> 文件，只需要如下命令，需要注意的是这样也会把项目中现有的所有 <code>.jpg</code> 文件清理掉。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>git filter-repo --path-glob &#39;*.jpg&#39; --invert-paths
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>之后，强制推送到远程👇
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>git push --all --force
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>git push --tags --force
+</span></span></code></pre></div><p>废了一些功夫，效果一级棒👍
+
+
+
+
+
+
+
+
+
+
+
+
+<figure class="">
+
+    <div class="img-container" >
+        <img loading="lazy" alt="" src="/images/git-slim/2.png" >
+    </div>
+
+    
+    <div class="caption-container">
+        <figcaption> 清理前 </figcaption>
+    </div>
+    
+</figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure class="">
+
+    <div class="img-container" >
+        <img loading="lazy" alt="" src="/images/git-slim/3.png" >
+    </div>
+
+    
+    <div class="caption-container">
+        <figcaption> 清理后 </figcaption>
+    </div>
+    
+</figure>
+</p>
+<p>参考链接：</p>
+<ul>
+<li><a href="https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E9%87%8D%E5%86%99%E5%8E%86%E5%8F%B2">Git-工具-重写历史</a></li>
+<li><a href="https://github.com/newren/git-filter-repo/blob/main/INSTALL.md">git-filter-repo</a></li>
+</ul>
+
+    </div>
+  </article>
+    <div class="single-comments">
+      <script src="https://giscus.app/client.js"
+        data-repo="https://github.com/flyingmylo/mylofi.github.io.git"
+        data-repo-id="repoId"
+        data-category=""
+        data-category-id="categoryId"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+    </div>
+
+  
+
+  
+
+  
+  
+
+<div class="single-pagination">
+    <hr />
+
+    <div class="flexnowrap">
+
+        <div class="single-pagination-prev">
+            
+            <div class="single-pagination-container-prev">
+                <div class="single-pagination-text">←</div>
+                <div class="single-pagination-text">
+                    <a href="/posts/interview/">
+                        面经记录
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="single-pagination-next">
+            
+            <div class="single-pagination-container-next">
+                <div class="single-pagination-text">
+                    <a href="/posts/nginx-conf/">
+                        使用 nginx 部署一个 hello world
+                    </a>
+                </div>
+                <div class="single-pagination-text">→</div>
+            </div>
+            
+        </div>
+
+    </div>
+
+    <hr />
+</div>
+
+
+
+  
+
+  
+
+  
+  <div class="back-to-top">
+    <a href="#top">
+      back to top
+    </a>
+  </div>
+  
+
+</div>
+
+
+    </main>
+  </div>
+
+  
+  
+
+
+
+
+
+    
+
+
+
+
+  <footer>
+    
+
+    
+    
+
+
+
+
+
+    
+
+
+
+
+    
+    <p>Powered by
+        <a href="https://gohugo.io/">Hugo</a>
+        and
+        <a href="https://github.com/tomfran/typo">tomfran/typo</a>
+    </p>
+    
+    
+    
+
+
+  </footer>
+
+  
+</body>
+
+<script src="/js/theme-switch.js"></script>
+<script defer src="/js/copy-code.js"></script>
+</html>

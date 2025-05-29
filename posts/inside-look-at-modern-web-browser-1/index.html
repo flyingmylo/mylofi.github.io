@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+  dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+<link rel="icon" type="image/ico" href="http://mylofi.fun/static/favicon.ico/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://mylofi.fun/static/favicon.ico/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://mylofi.fun/static/favicon.ico/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="http://mylofi.fun/static/favicon.ico/android-chrome-192x192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="http://mylofi.fun/static/favicon.ico/apple-touch-icon.png">
+
+<meta name="description" content=""/>
+
+
+
+<title>
+    
+    深入了解现代网络浏览器（1/4）【译】 | ⚽️
+    
+</title>
+
+<link rel="canonical" href="http://mylofi.fun/posts/inside-look-at-modern-web-browser-1/"/>
+
+<meta property="og:url" content="http://mylofi.fun/posts/inside-look-at-modern-web-browser-1/">
+  <meta property="og:site_name" content="⚽️">
+  <meta property="og:title" content="深入了解现代网络浏览器（1/4）【译】">
+  <meta property="og:description" content="📌 本篇原文发表于 2018.09.05，正文中出现的有关于时间概念的语句，阅读时请注意切换语境。 👉🏻原文链接
+中央处理器/图形处理器/内存/多进程架构 # 在这个包含 4 篇文章的博客系列中，我们将从高阶架构到具体的渲染细节来深入 Chrome 浏览器内部了解其是怎么运作的。如果你曾经好奇浏览器是怎么把代码转变成一个功能齐备的网站，或者你并不确定为什么一个具体的技术细节能够带来性能提升，那么这个系列正好是为你准备的。
+作为系列第一篇，我们将会了解一些核心的计算机术语和 Chrome 浏览器的多进程架构。如果你对 CPU/GPU 和 进程/线程已经很熟悉，可以直接跳到 浏览器架构 章节。
+计算机的核心 - CPU 和 GPU # 为了理解浏览器所运行的环境，我们需要先了解计算机的一些部件以及它们是做什么的。
+中央处理器 CPU # 首先是中央处理器（CPU, Central Processing Unit）。CPU 可以被看作是一台计算机的大脑，一个 CPU 内核可以想象成一位办公室工作人员，能够处理一个接一个被安排的多个任务，可以处理一切从数学甚至到艺术领域的难题，而且它知道如何去响应一个用户的指令。以前的大多数 CPU 都是单个芯片，一个内核就相当于是一个 CPU 被嵌入到一个芯片上。在现代的硬件条件下，出现了多核处理器，也赋予了手机、笔记本更强的计算能力。
+图 1：四个 CPU 内核就像彼此相邻的办公室职员一样处理多个任务 图形处理器 GPU # 图形处理器是计算机里的另一个部件。和 CPU 不同的是，GPU 更擅长在多核之间处理一些简单的任务。顾名思义，GPU 最初是被开发成处理图形任务的模块，这也是为什么在很多图形计算的背景下，会把“使用 GPU”或“支持 GPU”和快速渲染、流畅的交互体验相关联在一起。近些年来，有了 GPU 加速的计算能力，也使 GPU 独立承载越来越多的计算成为可能。
+图2：多个带着扳手🔧️的 GPU 内核，表明它们只能处理有限的任务 当你在手机或电脑上启动一个应用时，是 CPU 和 GPU 在给应用提供运行能力。通常情况下，操作系统提供了一套运行机制供应用程序在 CPU 和 GPU 运行。">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2022-05-18T23:40:32+08:00">
+    <meta property="article:modified_time" content="2022-05-18T23:40:32+08:00">
+    <meta property="article:tag" content="翻译">
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/assets/combined.min.04fb0b353b0d1d2950e7fec6d105b7e72b3ec97dd6e8d4e77c0aebdf0715425b.css" media="all">
+
+
+
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-xxxxxxxxx"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-xxxxxxxxx');
+        }
+      </script>
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+</head>
+
+
+
+
+
+
+
+<body class="auto">
+
+  <div class="content">
+    <header>
+      
+
+<div class="header">
+
+    
+
+</div>
+
+    </header>
+
+    <main class="main">
+      
+
+
+
+
+<div class="breadcrumbs"><a href="/">Home</a><span class="breadcrumbs-separator">/</span><a href="/posts/">Posts</a><span class="breadcrumbs-separator">/</span>
+        <a href="/posts/inside-look-at-modern-web-browser-1/">深入了解现代网络浏览器（1/4）【译】</a></div>
+
+
+<div >
+  <article>
+    <header class="single-intro-container">
+        
+        <h1 class="single-title">深入了解现代网络浏览器（1/4）【译】</h1>
+        
+        <div class="single-subsummary">
+          
+          <div>
+            
+            <p class="single-date">
+              <time datetime="2022-05-18T23:40:32&#43;08:00">May 18, 2022</time>
+            </p>
+          </div>
+        </div>
+        
+    </header>
+      <aside class="toc">
+        <p><strong>Table of contents</strong></p>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#中央处理器图形处理器内存多进程架构">中央处理器/图形处理器/内存/多进程架构</a></li>
+    <li><a href="#计算机的核心---cpu-和-gpu">计算机的核心 - CPU 和 GPU</a>
+      <ul>
+        <li><a href="#中央处理器-cpu">中央处理器 CPU</a></li>
+        <li><a href="#图形处理器-gpu">图形处理器 GPU</a></li>
+      </ul>
+    </li>
+    <li><a href="#在进程和线程里执行程序">在进程和线程里执行程序</a></li>
+    <li><a href="#浏览器架构">浏览器架构</a></li>
+    <li><a href="#不同的进程及其功能">不同的进程及其功能</a></li>
+    <li><a href="#chrome-浏览器中多进程的优势">Chrome 浏览器中多进程的优势</a></li>
+    <li><a href="#节省更多内存---chrome-中的服务化">节省更多内存 - Chrome 中的服务化</a></li>
+    <li><a href="#单个-frame-渲染器进程---网站隔离">单个 frame 渲染器进程 - 网站隔离</a></li>
+    <li><a href="#总结">总结</a></li>
+  </ul>
+</nav>
+      </aside>
+    
+    <div class="single-content">
+      <blockquote>
+<p>📌 本篇原文发表于 2018.09.05，正文中出现的有关于时间概念的语句，阅读时请注意切换语境。 👉🏻<a href="https://developer.chrome.com/blog/inside-browser-part1">原文链接</a></p></blockquote>
+<h2 class="heading" id="中央处理器图形处理器内存多进程架构">
+  中央处理器/图形处理器/内存/多进程架构
+  <a class="anchor" href="#%e4%b8%ad%e5%a4%ae%e5%a4%84%e7%90%86%e5%99%a8%e5%9b%be%e5%bd%a2%e5%a4%84%e7%90%86%e5%99%a8%e5%86%85%e5%ad%98%e5%a4%9a%e8%bf%9b%e7%a8%8b%e6%9e%b6%e6%9e%84">#</a>
+</h2>
+<p>在这个包含 4 篇文章的博客系列中，我们将从高阶架构到具体的渲染细节来深入 Chrome 浏览器内部了解其是怎么运作的。如果你曾经好奇浏览器是怎么把代码转变成一个功能齐备的网站，或者你并不确定为什么一个具体的技术细节能够带来性能提升，那么这个系列正好是为你准备的。</p>
+<p>作为系列第一篇，我们将会了解一些核心的计算机术语和 Chrome 浏览器的多进程架构。如果你对 CPU/GPU 和 进程/线程已经很熟悉，可以直接跳到 <a href="https://www.notion.so/1-4-f99425f08f0c427480b1b87116613422">浏览器架构</a> 章节。</p>
+<h2 class="heading" id="计算机的核心---cpu-和-gpu">
+  计算机的核心 - CPU 和 GPU
+  <a class="anchor" href="#%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%9a%84%e6%a0%b8%e5%bf%83---cpu-%e5%92%8c-gpu">#</a>
+</h2>
+<blockquote>
+<p>为了理解浏览器所运行的环境，我们需要先了解计算机的一些部件以及它们是做什么的。</p></blockquote>
+<h3 class="heading" id="中央处理器-cpu">
+  中央处理器 CPU
+  <a class="anchor" href="#%e4%b8%ad%e5%a4%ae%e5%a4%84%e7%90%86%e5%99%a8-cpu">#</a>
+</h3>
+<p>首先是中央处理器（CPU, Central Processing Unit）。CPU 可以被看作是一台计算机的大脑，一个 CPU 内核可以想象成一位办公室工作人员，能够处理一个接一个被安排的多个任务，可以处理一切从数学甚至到艺术领域的难题，而且它知道如何去响应一个用户的指令。以前的大多数 CPU 都是单个芯片，一个内核就相当于是一个 CPU 被嵌入到一个芯片上。在现代的硬件条件下，出现了多核处理器，也赋予了手机、笔记本更强的计算能力。</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+<figure class="">
+
+    <div class="img-container" >
+        <img loading="lazy" alt="" src="/images/figure-1.png" >
+    </div>
+
+    
+    <div class="caption-container">
+        <figcaption> 图 1：四个 CPU 内核就像彼此相邻的办公室职员一样处理多个任务 </figcaption>
+    </div>
+    
+</figure>
+</p>
+<h3 class="heading" id="图形处理器-gpu">
+  图形处理器 GPU
+  <a class="anchor" href="#%e5%9b%be%e5%bd%a2%e5%a4%84%e7%90%86%e5%99%a8-gpu">#</a>
+</h3>
+<p>图形处理器是计算机里的另一个部件。和 CPU 不同的是，GPU 更擅长在多核之间处理一些简单的任务。顾名思义，GPU 最初是被开发成处理图形任务的模块，这也是为什么在很多图形计算的背景下，会把“使用 GPU”或“支持 GPU”和快速渲染、流畅的交互体验相关联在一起。近些年来，有了 GPU 加速的计算能力，也使 GPU 独立承载越来越多的计算成为可能。</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+<figure class="">
+
+    <div class="img-container" >
+        <img loading="lazy" alt="" src="/images/figure-2.webp" >
+    </div>
+
+    
+    <div class="caption-container">
+        <figcaption> 图2：多个带着扳手🔧️的 GPU 内核，表明它们只能处理有限的任务 </figcaption>
+    </div>
+    
+</figure>
+</p>
+<p>当你在手机或电脑上启动一个应用时，是 CPU 和 GPU 在给应用提供运行能力。通常情况下，操作系统提供了一套运行机制供应用程序在 CPU 和 GPU 运行。</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+<figure class="">
+
+    <div class="img-container" >
+        <img loading="lazy" alt="" src="/images/figure-3.webp" >
+    </div>
+
+    
+    <div class="caption-container">
+        <figcaption> 图 3: 计算机的三层架构示意图；机械硬件在最底层，操作系统在中间层，应用程序在最上层 </figcaption>
+    </div>
+    
+</figure>
+</p>
+<h2 class="heading" id="在进程和线程里执行程序">
+  在进程和线程里执行程序
+  <a class="anchor" href="#%e5%9c%a8%e8%bf%9b%e7%a8%8b%e5%92%8c%e7%ba%bf%e7%a8%8b%e9%87%8c%e6%89%a7%e8%a1%8c%e7%a8%8b%e5%ba%8f">#</a>
+</h2>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+<figure class="">
+
+    <div class="img-container" >
+        <img loading="lazy" alt="" src="/images/figure-4.webp" >
+    </div>
+
+    
+    <div class="caption-container">
+        <figcaption> 图 4: 进程就像一个鱼缸，线程就像鱼儿🐟️在鱼缸里游泳🏊🏻‍♀️ </figcaption>
+    </div>
+    
+</figure>
+</p>
+<p>在深入了解浏览器架构之前，另一个需要掌握的概念是 <strong>进程</strong> 和 <strong>线程</strong>。一个进程可以被看作是一个应用的执行程序，线程不仅是进程的一部分，而且可以执行其所在进程里的任意部分的程序代码。</p>
+<p>当启动一个应用时，就等于创建了一个进程。程序可能会创建一个或多个线程来保障其正常工作，当然也可能不会创建。操作系统为进程提供了一个内存管理器，所有的应用状态都被保存在私密的内存空间中，当应用被关闭的时候，该进程也相应消失，同时操作系统也会释放内存。</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+<figure class="">
+
+    <div class="img-container" >
+        <img loading="lazy" alt="" src="/images/figure-5.svg" >
+    </div>
+
+    
+    <div class="caption-container">
+        <figcaption> 图 5: 进程使用内存空间存储应用数据 </figcaption>
+    </div>
+    
+</figure>
+</p>
+<p>一个进程可以请求让操作系统去启动另外一个进程以运行不同的任务，如此一来，不同的内存空间也会被分配给新的进程。不同的进程之间可以通过 <strong>IPC</strong> (进程间通信 <strong>I</strong>nter <strong>P</strong>rocess <strong>C</strong>ommunication) 进行通信，许多应用都是使用这种设计方式开发的，以便于当一个工作进程没有响应的时候，该进程可以在不影响其他进程的情况下重新启动。</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+<figure class="">
+
+    <div class="img-container" >
+        <img loading="lazy" alt="" src="/images/figure-6.svg" >
+    </div>
+
+    
+    <div class="caption-container">
+        <figcaption> 图 6: 不同的进程之间通过 IPC 进行通信 </figcaption>
+    </div>
+    
+</figure>
+</p>
+<h2 class="heading" id="浏览器架构">
+  浏览器架构
+  <a class="anchor" href="#%e6%b5%8f%e8%a7%88%e5%99%a8%e6%9e%b6%e6%9e%84">#</a>
+</h2>
+<p>那么现代浏览器是如何利用进程和线程构建的呢？好吧 =。= 可能是一个进程和很多个不同的线程，也可能是很多不同的进程和一些通过 IPC 通信的线程。</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+<figure class="">
+
+    <div class="img-container" >
+        <img loading="lazy" alt="" src="/images/figure-7.webp" >
+    </div>
+
+    
+    <div class="caption-container">
+        <figcaption> 图 7:  进程与线程间的不同浏览器架构 </figcaption>
+    </div>
+    
+</figure>
+</p>
+<p>需要注意的一个重要信息是，这些不同的架构主要是实现上的细节，构建一个浏览器并没有标准的规范，一个浏览器的实现方式也可能和其他的浏览器完全不同。</p>
+<p>在本博客系列中，我们将用下文中的图示来描述 Chrome 浏览器最近更新的的架构。</p>
+<p>图中最上层是浏览器进程在统一协调其他进程，它们分别负责应用程序内不同模块的代码执行。对于渲染器进程来说，它会创建多个进程并将其分配给每一个标签页，直到最近，Chrome 会在可能的情况下会给每个标签页分配一个进程；现在，Chrome 正在尝试着给每一个站点分配它自己的进程，包括 iframes（查看 <a href="https://www.notion.so/1-4-f99425f08f0c427480b1b87116613422">网站隔离</a>）。</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+<figure class="">
+
+    <div class="img-container" >
+        <img loading="lazy" alt="" src="/images/figure-8.webp" >
+    </div>
+
+    
+    <div class="caption-container">
+        <figcaption> 图 8: Chrome 的多进程架构示意图。可以看到渲染器进程下是有多个层级的，也表明着 Chrome 在每个标签页中执行着多个渲染器进程 </figcaption>
+    </div>
+    
+</figure>
+</p>
+<h2 class="heading" id="不同的进程及其功能">
+  不同的进程及其功能
+  <a class="anchor" href="#%e4%b8%8d%e5%90%8c%e7%9a%84%e8%bf%9b%e7%a8%8b%e5%8f%8a%e5%85%b6%e5%8a%9f%e8%83%bd">#</a>
+</h2>
+
+<div class="table-outer">
+    <table>
+        <thead>
+            <tr>
+                <th>进程</th>
+                <th>功能</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>浏览器进程</td>
+                <td>控制 Chrome 浏览器应用本身，包括地址栏、书签、返回和前进按钮。同时也处理网页浏览器中那些看不到的、比较特殊的任务，比如网络请求和文件访问等</td>
+            </tr>
+            <tr>
+                <td>渲染器进程</td>
+                <td>控制标签页中一个网页显示的所有内容</td>
+            </tr>
+            <tr>
+                <td>插件进程</td>
+                <td>控制网页中使用的插件，比如 flash</td>
+            </tr>
+            <tr>
+                <td>GPU 进程</td>
+                <td>和其他进程相对独立，负责处理图形任务。GPU 进程会被划分为不同的进程，因为它会处理多个应用程序的请求并把它们绘制到同一个界面上。</td>
+            </tr>
+        </tbody>
+    </table>
+</div><p>
+
+
+
+
+
+
+
+
+
+
+
+<figure class="">
+
+    <div class="img-container" >
+        <img loading="lazy" alt="" src="/images/figure-9.webp" >
+    </div>
+
+    
+    <div class="caption-container">
+        <figcaption> 图 9: 不同的进程负责浏览器界面的不同部分 </figcaption>
+    </div>
+    
+</figure>
+</p>
+<p>还有很多像扩展和通用的进程。如果你想要查看在 Chrome 中运行了多少进程，可以依次点击右上角的「**···**选项」菜单 →「更多工具」→「任务管理」，之后会打开一个窗口，显示当前运行进程的列表和 CPU 及内存的占用情况。</p>
+<h2 class="heading" id="chrome-浏览器中多进程的优势">
+  Chrome 浏览器中多进程的优势
+  <a class="anchor" href="#chrome-%e6%b5%8f%e8%a7%88%e5%99%a8%e4%b8%ad%e5%a4%9a%e8%bf%9b%e7%a8%8b%e7%9a%84%e4%bc%98%e5%8a%bf">#</a>
+</h2>
+<p>上文中，我们提到 Chrome 使用了多个渲染器进程。举个最简单的例子来讲，你可以想象一下每个标签页都有自己的渲染器进程，让我们假设你已经打开了 3 个标签页，而且每个标签页都由一个独立的渲染器进程负责运行，这时如果其中一个标签页没有响应或是卡死，那你可以关闭这个无响应的页面，同时还能保证其他页面正常运行。但如果所有的标签页都运行在同一个进程上，当有其中一个页面无响应时，那所有的页面也都会死翘翘，着实令人难过。🥲</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+<figure class="">
+
+    <div class="img-container" >
+        <img loading="lazy" alt="" src="/images/figure-10.webp" >
+    </div>
+
+    
+    <div class="caption-container">
+        <figcaption> 图 10: 每个标签页运行多个进程 </figcaption>
+    </div>
+    
+</figure>
+</p>
+<p>将浏览器的工作分离成多个进程的另一个好处是安全和沙盒化。由于操作系统提供了一种限制进程的方法，浏览器可以对某些进程进行沙盒化处理，使其与某些功能隔离起来。例如，浏览器限制了任意用户的输入进程对访问文件的权限，就像渲染器进程一样。</p>
+<p>由于进程都有自己私有的内存空间，它们通常包含了一些通用基础架构的副本（如 V8 ， Chrome 的 JS 引擎）。这意味着会有更多的内存占用，因为它们不能像在同一进程中的线程那样共享。为了节省内存，Chrome 限制了它可以启动的进程数量，限制的进程数取决于设备的内存大小和 CPU 功率，当到达了限制数的上限时，它就会开始将同一站点的多个标签页运行在一个进程上。</p>
+<h2 class="heading" id="节省更多内存---chrome-中的服务化">
+  节省更多内存 - Chrome 中的服务化
+  <a class="anchor" href="#%e8%8a%82%e7%9c%81%e6%9b%b4%e5%a4%9a%e5%86%85%e5%ad%98---chrome-%e4%b8%ad%e7%9a%84%e6%9c%8d%e5%8a%a1%e5%8c%96">#</a>
+</h2>
+<p>浏览器进程的实现方式是大致相同的。Chrome 正在改变它的架构，将浏览器程序的每个部分作为服务运行，从而可以轻松地将浏览器的各个模块拆分为不同的进程或者聚合为一个进程。</p>
+<p>通常情况下，当 Chrome 运行在一个配置强悍的硬件上时， 它可能会将每个服务分离成不同的进程，以获取更好的稳定性，但是如果是一台配置有限的设备上，Chrome 会为了节省内存占用将服务合并为一个进程。这与之前安卓平台的实现方式大同小异，都是通过合并进程来换来更少的内存占用。</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+<figure class="">
+
+    <div class="img-container" >
+        <img loading="lazy" alt="" src="/images/figure-11.svg" >
+    </div>
+
+    
+    <div class="caption-container">
+        <figcaption> 图 11: Chrome 将不同的服务转化为多个进程和一个浏览器进程 </figcaption>
+    </div>
+    
+</figure>
+</p>
+<h2 class="heading" id="单个-frame-渲染器进程---网站隔离">
+  单个 frame 渲染器进程 - 网站隔离
+  <a class="anchor" href="#%e5%8d%95%e4%b8%aa-frame-%e6%b8%b2%e6%9f%93%e5%99%a8%e8%bf%9b%e7%a8%8b---%e7%bd%91%e7%ab%99%e9%9a%94%e7%a6%bb">#</a>
+</h2>
+<p><a href="https://developers.google.com//web/updates/2018/07/site-isolation">网站隔离</a> 是 Chrome 最近介绍的一项新功能，该功能可以为每一个跨域的 iframe 运行一个单独的渲染器进程。我们已经阐述过单个标签页对应单个渲染器进程的模式，这种模式允许跨域的 iframe 运行在一个单独的渲染器进程里，同时和其他网站共享内存空间。这也使得在同一个渲染器进程里运行 <a href="http://a.com">a.com</a> 和 <a href="http://b.com">b.com</a> 看起来是没什么问题的。<a href="https://developer.mozilla.org/docs/Web/Security/Same-origin_policy">同源策略</a> 是浏览器里核心的安全模型，它保证了一个网站不能在没有获取另一个网站的允许下访问该网站的数据。绕过这个策略是很多攻击网站安全的主要目标，而进程隔离是隔离网站最有效的方式，有了 <a href="https://developers.google.com/web/updates/2018/02/meltdown-spectre">幽灵漏洞</a> ，可以更明显地意识到，我们需要使用进程来隔离网站。自从 Chrome 67 之后，默认情况下隔离功能是开启的，这样一来，每个跨域的网站都会有一个单独的渲染器进程。</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+<figure class="">
+
+    <div class="img-container" >
+        <img loading="lazy" alt="" src="/images/figure-12.webp" >
+    </div>
+
+    
+    <div class="caption-container">
+        <figcaption> 图 12: 网站隔离，一个网页中有多个渲染器进程指向 iframe </figcaption>
+    </div>
+    
+</figure>
+</p>
+<p>支持网站隔离功能是开发者多年以来努力的成果，网站隔离并不像合并多个不同的渲染器进程那样简单，它从根本上改变了 iframes 之间相互通信的方式。在不同进程中运行 iframe 的页面上打开 devtools，意味着 devtools 不得不执行一些幕后工作，才能使其看起来像无缝衔接。甚至是一个简单的 Ctrl+F 查找功能都要横跨数个不同的渲染器进程进行搜索。现在你能明白为什么浏览器开发工程师们说网站隔离的发布可以看作是一个里程碑的实现了吧！（哈哈哈真不容易🤓）。</p>
+<h2 class="heading" id="总结">
+  总结
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93">#</a>
+</h2>
+<p>本篇文章中，我们已经介绍了从高阶视角来看待浏览器架构和多进程架构的优势，还涉及到了 Chrome 中与多进程架构有深深关联的服务化和网站隔离。在下一篇文章中，我们将开始深入了解使网站呈现出来时，进程和线程之间都发生了什么事情。</p>
+<p>下一篇：导航栏里发生了什么事情？</p>
+
+    </div>
+  </article>
+    <div class="single-comments">
+      <script src="https://giscus.app/client.js"
+        data-repo="https://github.com/flyingmylo/mylofi.github.io.git"
+        data-repo-id="repoId"
+        data-category=""
+        data-category-id="categoryId"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+    </div>
+
+  
+
+  
+
+  
+  
+
+<div class="single-pagination">
+    <hr />
+
+    <div class="flexnowrap">
+
+        <div class="single-pagination-prev">
+            
+            <div class="single-pagination-container-prev">
+                <div class="single-pagination-text">←</div>
+                <div class="single-pagination-text">
+                    <a href="/posts/git-command/">
+                        Git 常用命令
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="single-pagination-next">
+            
+            <div class="single-pagination-container-next">
+                <div class="single-pagination-text">
+                    <a href="/posts/inside-look-at-modern-web-browser-2/">
+                        深入了解现代网络浏览器（2/4）【译】
+                    </a>
+                </div>
+                <div class="single-pagination-text">→</div>
+            </div>
+            
+        </div>
+
+    </div>
+
+    <hr />
+</div>
+
+
+
+  
+
+  
+
+  
+  <div class="back-to-top">
+    <a href="#top">
+      back to top
+    </a>
+  </div>
+  
+
+</div>
+
+
+    </main>
+  </div>
+
+  
+  
+
+
+
+
+
+    
+
+
+
+
+  <footer>
+    
+
+    
+    
+
+
+
+
+
+    
+
+
+
+
+    
+    <p>Powered by
+        <a href="https://gohugo.io/">Hugo</a>
+        and
+        <a href="https://github.com/tomfran/typo">tomfran/typo</a>
+    </p>
+    
+    
+    
+
+
+  </footer>
+
+  
+</body>
+
+<script src="/js/theme-switch.js"></script>
+<script defer src="/js/copy-code.js"></script>
+</html>

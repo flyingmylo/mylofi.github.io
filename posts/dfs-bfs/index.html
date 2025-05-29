@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+  dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+<link rel="icon" type="image/ico" href="http://mylofi.fun/static/favicon.ico/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://mylofi.fun/static/favicon.ico/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://mylofi.fun/static/favicon.ico/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="http://mylofi.fun/static/favicon.ico/android-chrome-192x192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="http://mylofi.fun/static/favicon.ico/apple-touch-icon.png">
+
+<meta name="description" content=""/>
+
+
+
+<title>
+    
+    算法之深度优先搜索与广度优先搜索 | ⚽️
+    
+</title>
+
+<link rel="canonical" href="http://mylofi.fun/posts/dfs-bfs/"/>
+
+<meta property="og:url" content="http://mylofi.fun/posts/dfs-bfs/">
+  <meta property="og:site_name" content="⚽️">
+  <meta property="og:title" content="算法之深度优先搜索与广度优先搜索">
+  <meta property="og:description" content="深度优先搜索 DFS # 深度优先搜索（Depth-First-Search）和广度优先搜索（Breadth-First-Search）都是一种用来遍历或者搜索树或图这种数据结构的算法。以树为例，深度优先搜索的过程会从根节点出发，尽可能深地遍历每个子节点，而且每个节点只能访问一次，是一个不断回溯的过程。
+实现方法大致如下：
+首先将根节点放入栈中 从栈中取出第一个节点，并检验它是否为目标 如果找到目标，则结束搜索并返回结果 否则将它某一个尚未检验过的直接子节点放入栈中 重复步骤 2 如果不存在未检测过的直接子节点 将上一级节点放入栈中 重复步骤 2 重复步骤 4 若栈为空，表示整张图都已检查过并且没有要查找的目标，结束搜索 另外需要我们了解的一种数据结构：栈。
+我们可以把盏比喻成一包手帕纸，每张纸巾都是按序一张一张放进去的，使用的时候是一张一张从最上边开始拿出来的。所以栈是一种后进先出（Last In First Out, LIFO）的数据结构。
+示例：通过 DFS 实现复制对象的复制
+const copyDFS = function(obj) { if (obj === null || typeof obj !== &#34;object&#34;) { return obj; } const copyObj = Array.isArray(obj) ? [] : {}; for (const key in obj) { copyObj[key] = copyDFS(obj[key]); } return copyObj; } 示例：获取对象的所有键
+const obj = { a: 1, b: 2, c: { d: 4, e: 5} } function dfs(obj, keys = []) { Object.entries(obj).forEach(([k, v]) =&gt; { keys.push(k) if (typeof v === &#39;object&#39;) dfs(v, keys) else return }) return keys } // [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;, &#39;f&#39;] console.log(dfs(obj)) 广度优先搜索 BFS # 广度优先搜索（Breadth-First-Search）也会沿着树的宽度进行遍历，通常用来解决两种问题：">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2022-07-07T21:27:33+08:00">
+    <meta property="article:modified_time" content="2022-07-07T21:27:33+08:00">
+    <meta property="article:tag" content="算法">
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/assets/combined.min.04fb0b353b0d1d2950e7fec6d105b7e72b3ec97dd6e8d4e77c0aebdf0715425b.css" media="all">
+
+
+
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-xxxxxxxxx"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-xxxxxxxxx');
+        }
+      </script>
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+</head>
+
+
+
+
+
+
+
+<body class="auto">
+
+  <div class="content">
+    <header>
+      
+
+<div class="header">
+
+    
+
+</div>
+
+    </header>
+
+    <main class="main">
+      
+
+
+
+
+<div class="breadcrumbs"><a href="/">Home</a><span class="breadcrumbs-separator">/</span><a href="/posts/">Posts</a><span class="breadcrumbs-separator">/</span>
+        <a href="/posts/dfs-bfs/">算法之深度优先搜索与广度优先搜索</a></div>
+
+
+<div >
+  <article>
+    <header class="single-intro-container">
+        
+        <h1 class="single-title">算法之深度优先搜索与广度优先搜索</h1>
+        
+        <div class="single-subsummary">
+          
+          <div>
+            
+            <p class="single-date">
+              <time datetime="2022-07-07T21:27:33&#43;08:00">July 7, 2022</time>
+            </p>
+          </div>
+        </div>
+        
+    </header>
+      <aside class="toc">
+        <p><strong>Table of contents</strong></p>
+        <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#深度优先搜索-dfs">深度优先搜索 DFS</a></li>
+        <li><a href="#广度优先搜索-bfs">广度优先搜索 BFS</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+      </aside>
+    
+    <div class="single-content">
+      <h3 class="heading" id="深度优先搜索-dfs">
+  深度优先搜索 DFS
+  <a class="anchor" href="#%e6%b7%b1%e5%ba%a6%e4%bc%98%e5%85%88%e6%90%9c%e7%b4%a2-dfs">#</a>
+</h3>
+<p>深度优先搜索（Depth-First-Search）和广度优先搜索（Breadth-First-Search）都是一种用来遍历或者搜索树或图这种数据结构的算法。以树为例，深度优先搜索的过程会从根节点出发，尽可能深地遍历每个子节点，而且每个节点只能访问一次，是一个不断回溯的过程。</p>
+<p>实现方法大致如下：</p>
+<ol>
+<li>首先将根节点放入栈中</li>
+<li>从栈中取出第一个节点，并检验它是否为目标
+<ol>
+<li>如果找到目标，则结束搜索并返回结果</li>
+<li>否则将它某一个尚未检验过的直接子节点放入栈中</li>
+</ol>
+</li>
+<li>重复步骤 2</li>
+<li>如果不存在未检测过的直接子节点
+<ol>
+<li>将上一级节点放入栈中</li>
+<li>重复步骤 2</li>
+</ol>
+</li>
+<li>重复步骤 4</li>
+<li>若栈为空，表示整张图都已检查过并且没有要查找的目标，结束搜索</li>
+</ol>
+<p>另外需要我们了解的一种数据结构：栈。</p>
+<p>我们可以把盏比喻成一包手帕纸，每张纸巾都是按序一张一张放进去的，使用的时候是一张一张从最上边开始拿出来的。所以栈是一种后进先出（Last In First Out, LIFO）的数据结构。</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+<figure class="">
+
+    <div class="img-container" >
+        <img loading="lazy" alt="" src="/images/dfs-bfs/dfs.png?width=50%22%e6%b7%b1%e5%ba%a6%e4%bc%98%e5%85%88%e6%90%9c%e7%b4%a2%22" >
+    </div>
+
+    
+</figure>
+</p>
+<p>示例：通过 DFS 实现复制对象的复制</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="font-weight:bold;text-decoration:underline">const</span> copyDFS = <span style="font-weight:bold;font-style:italic;text-decoration:underline">function</span>(obj) {
+</span></span><span style="display:flex;"><span>  <span style="font-weight:bold;text-decoration:underline">if</span> (obj === <span style="font-weight:bold;text-decoration:underline">null</span> || <span style="font-weight:bold;text-decoration:underline">typeof</span> obj !== <span style="color:#666;font-style:italic">&#34;object&#34;</span>) {
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold;text-decoration:underline">return</span> obj;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="font-weight:bold;text-decoration:underline">const</span> copyObj = <span style="font-weight:bold;font-style:italic">Array</span>.isArray(obj) ? [] : {};
+</span></span><span style="display:flex;"><span>  <span style="font-weight:bold;text-decoration:underline">for</span> (<span style="font-weight:bold;text-decoration:underline">const</span> key <span style="font-weight:bold;text-decoration:underline">in</span> obj) {
+</span></span><span style="display:flex;"><span>    copyObj[key] = copyDFS(obj[key]);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="font-weight:bold;text-decoration:underline">return</span> copyObj;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>示例：获取对象的所有键</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="font-weight:bold;text-decoration:underline">const</span> obj = { a: 1, b: 2, c: { d: 4, e: 5} }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold;font-style:italic;text-decoration:underline">function</span> dfs(obj, keys = []) {
+</span></span><span style="display:flex;"><span>  <span style="font-weight:bold;font-style:italic">Object</span>.entries(obj).forEach(([k, v]) =&gt; {
+</span></span><span style="display:flex;"><span>    keys.push(k)
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold;text-decoration:underline">if</span> (<span style="font-weight:bold;text-decoration:underline">typeof</span> v === <span style="color:#666;font-style:italic">&#39;object&#39;</span>) dfs(v, keys)
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold;text-decoration:underline">else</span> <span style="font-weight:bold;text-decoration:underline">return</span>
+</span></span><span style="display:flex;"><span>  })
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="font-weight:bold;text-decoration:underline">return</span> keys
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;, &#39;f&#39;]
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>console.log(dfs(obj))
+</span></span></code></pre></div><h3 class="heading" id="广度优先搜索-bfs">
+  广度优先搜索 BFS
+  <a class="anchor" href="#%e5%b9%bf%e5%ba%a6%e4%bc%98%e5%85%88%e6%90%9c%e7%b4%a2-bfs">#</a>
+</h3>
+<p>广度优先搜索（Breadth-First-Search）也会沿着树的宽度进行遍历，通常用来解决两种问题：</p>
+<ul>
+<li>从节点 A 出发，有前往节点 B 的路径吗？</li>
+<li>从节点 A 出发，前往节点 B 的哪条路径最短？</li>
+</ul>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+<figure class="">
+
+    <div class="img-container" >
+        <img loading="lazy" alt="" src="/images/dfs-bfs/bfs.png?width=50%22%e5%b9%bf%e5%ba%a6%e4%bc%98%e5%85%88%e6%90%9c%e7%b4%a2%22" >
+    </div>
+
+    
+</figure>
+</p>
+<p>举个例子，假如今天的你心血来潮突然想看《假面骑士》，当你打开腾讯视频的时候发现只有会员才能看，真扫兴（胜利的法则变得不太确定）。这时你又不想自费充会员，所以就想找朋友借个用用。于是去挨个去问你的朋友，如果你的朋友里都没有会员，那就必须要找你朋友的朋友，别忘了你的目标是找来一个会员账号。首先，将你的朋友列入一个名单中依次查找，如果你的朋友李白没有会员，其次再将李白的朋友也加入到名单中，所以为了这个目标，你需要在你的朋友、朋友的朋友中查找，这种方式会搜遍你的整个人际关系网络，直到借来一个会员账号（胜利的法则已经决定✌️）或者一个会员都没有为止，这个过程就是广度优先搜索算法。</p>
+<p>回到刚才的两个问题：</p>
+<ul>
+<li>从节点 A 出发，有前往节点 B 的路径吗？（在你的人际关系网中，有会员吗？）</li>
+<li>从节点 A 出发，前往节点 B 的哪条路径最短？（哪个拥有会员的朋友和你的关系最近？）</li>
+</ul>
+<p>第一个问题已经在上例中说明；第二个问题就是怎么找到关系最近的朋友。</p>
+<p>假设你的朋友是一层关系，朋友的朋友是二层关系。很显然，一层关系优于二层关系，二层关系优于三层关系，以此类推。需要注意的是，<strong>一层关系是在二层关系之前加入名单的</strong>，这就意味着我们依次对名单<strong>按照顺序</strong>进行查找出来的结果一定是关系最近的朋友，所以，广度优先搜索不仅查找 A 到 B 的路径，而且找到的是<strong>最短路径</strong>。</p>
+<p>对于 BFS 算法，我们还需要了解另外一个数据结构：队列。</p>
+<p>队列的工作原理和现实生活中的队列一样，假设你和朋友一起在排队买咖啡，如果你排在他前面，那就是你先买到咖啡。队列只支持两种操作：入队和出队，是一种先进先出（First In First Out, FIFO）的数据结构，</p>
+<p>至此，我们可以使用队列来表示这份朋友名单，因为先加入的朋友（一层关系）将会先出队列并而且先被检查。</p>
+<p>实现方法大致如下：</p>
+<ol>
+<li>首先将根节点放入队列中</li>
+<li>从队列中取出第一个节点，并检查它是否为目标
+<ol>
+<li>如果找到目标，则结束搜索并返回结果</li>
+<li>否则将它所有尚未检查过的子节点加入队列中</li>
+</ol>
+</li>
+<li>若队列为空，表示整张图都检查过了，即没有查询的目标</li>
+<li>重复步骤 2</li>
+</ol>
+<p>示例：通过 DFS 实现对象深拷贝：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="font-weight:bold;font-style:italic;text-decoration:underline">function</span> deepCopy(obj) {
+</span></span><span style="display:flex;"><span>  <span style="font-weight:bold;text-decoration:underline">const</span> queue = [obj]
+</span></span><span style="display:flex;"><span>  <span style="font-weight:bold;text-decoration:underline">const</span> newObject = {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="font-weight:bold;text-decoration:underline">while</span> (queue.length &gt; 0) {
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold;text-decoration:underline">const</span> currentObj = queue.shift()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold;font-style:italic">Object</span>.keys(currentObj).forEach((key) =&gt; {
+</span></span><span style="display:flex;"><span>      <span style="font-weight:bold;text-decoration:underline">const</span> value = currentObj[key]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="font-weight:bold;text-decoration:underline">if</span> (<span style="font-weight:bold;text-decoration:underline">typeof</span> value === <span style="color:#666;font-style:italic">&#39;object&#39;</span> &amp;&amp; value !== <span style="font-weight:bold;text-decoration:underline">null</span>) {
+</span></span><span style="display:flex;"><span>        queue.push(value)
+</span></span><span style="display:flex;"><span>        newObject[key] = <span style="font-weight:bold;font-style:italic">Array</span>.isArray(value) ? [] : {}
+</span></span><span style="display:flex;"><span>      } <span style="font-weight:bold;text-decoration:underline">else</span> {
+</span></span><span style="display:flex;"><span>        newObject[key] = value
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="font-weight:bold;text-decoration:underline">return</span> newObject
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold;text-decoration:underline">const</span> obj = { a: 1, b: 2 }
+</span></span><span style="display:flex;"><span><span style="font-weight:bold;text-decoration:underline">const</span> copy = deepCopy(obj)
+</span></span><span style="display:flex;"><span>copy.a = 3
+</span></span><span style="display:flex;"><span>console.log(copy) <span style="color:#888;font-style:italic">// {a: 3, b: 2}
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>console.log(copy === obj) <span style="color:#888;font-style:italic">// false
+</span></span></span></code></pre></div>
+    </div>
+  </article>
+    <div class="single-comments">
+      <script src="https://giscus.app/client.js"
+        data-repo="https://github.com/flyingmylo/mylofi.github.io.git"
+        data-repo-id="repoId"
+        data-category=""
+        data-category-id="categoryId"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+    </div>
+
+  
+
+  
+
+  
+  
+
+<div class="single-pagination">
+    <hr />
+
+    <div class="flexnowrap">
+
+        <div class="single-pagination-prev">
+            
+            <div class="single-pagination-container-prev">
+                <div class="single-pagination-text">←</div>
+                <div class="single-pagination-text">
+                    <a href="/posts/inside-look-at-modern-web-browser-2/">
+                        深入了解现代网络浏览器（2/4）【译】
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="single-pagination-next">
+            
+            <div class="single-pagination-container-next">
+                <div class="single-pagination-text">
+                    <a href="/posts/interview/">
+                        面经记录
+                    </a>
+                </div>
+                <div class="single-pagination-text">→</div>
+            </div>
+            
+        </div>
+
+    </div>
+
+    <hr />
+</div>
+
+
+
+  
+
+  
+
+  
+  <div class="back-to-top">
+    <a href="#top">
+      back to top
+    </a>
+  </div>
+  
+
+</div>
+
+
+    </main>
+  </div>
+
+  
+  
+
+
+
+
+
+    
+
+
+
+
+  <footer>
+    
+
+    
+    
+
+
+
+
+
+    
+
+
+
+
+    
+    <p>Powered by
+        <a href="https://gohugo.io/">Hugo</a>
+        and
+        <a href="https://github.com/tomfran/typo">tomfran/typo</a>
+    </p>
+    
+    
+    
+
+
+  </footer>
+
+  
+</body>
+
+<script src="/js/theme-switch.js"></script>
+<script defer src="/js/copy-code.js"></script>
+</html>
