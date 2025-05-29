@@ -20,11 +20,11 @@
 
 
 
-<link rel="icon" type="image/ico" href="http://mylofi.fun/static/favicon.ico/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://mylofi.fun/static/favicon.ico/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://mylofi.fun/static/favicon.ico/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="192x192" href="http://mylofi.fun/static/favicon.ico/android-chrome-192x192.png">
-<link rel="apple-touch-icon" sizes="180x180" href="http://mylofi.fun/static/favicon.ico/apple-touch-icon.png">
+<link rel="icon" type="image/ico" href="http://mylofi.fun/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://mylofi.fun/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://mylofi.fun/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="http://mylofi.fun/android-chrome-192x192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="http://mylofi.fun/apple-touch-icon.png">
 
 <meta name="description" content=""/>
 
@@ -32,24 +32,15 @@
 
 <title>
     
-    清理 Git 文件夹过期引用 | ⚽️
+    记 Git 目录体积过大的优化方案 | 
     
 </title>
 
 <link rel="canonical" href="http://mylofi.fun/posts/git-slim/"/>
 
 <meta property="og:url" content="http://mylofi.fun/posts/git-slim/">
-  <meta property="og:site_name" content="⚽️">
-  <meta property="og:title" content="清理 Git 文件夹过期引用">
-  <meta property="og:description" content="Git 版本仓库提交过多，会导致项目根目录下的 .git 文件夹体积巨大，原因可能不只是单纯的提交历史过多，而是历史提交中包含有对大文件的引用，即使现在的项目中已经不存在这些文件了，但其引用关联依旧会被 git 保留下来。
-踩坑方案一 # git filter-branch 命令可以改写历史中大量的提交，但是它有很多陷阱，而且官方文档中已经不推荐使用它来重写历史了，当然，这个坑是我踩过之后才知道的。
-识别查询大文件 # 找到项目根目录下的 .idx 文件，路径：
-.git/objects/pack/pack-************.idx
-执行：
-git rev-list --objects --all | grep -f &lt;(git verify-pack -v .git/objects/pack/******.idx| sort -k 3 -n | cut -f 1 -d &#34; &#34; | tail -10)
-运行结果大致如下：
-c0b33abdf3af4f0a4ae82d6243954eeb344432d9 src/components/Emoji/emoji.png a08b3b0f766d26729cbaf0b7e86212b0ca4a5569 dist/js/2a10361c.async.js 1d26f0da81c885c676badb026367a47183013fb5 dist/js/84ad94bf.async.js eb07071cdea7e019953a3a6778a4bb6e728ea13d dist/js/4922a65f.async.js 7ddf057a0e26f300137c84cf03dbe088a69da488 dist/js/62f9d99c.async.js 删除文件 # 将该文件从历史记录的所有 tree 中移除，执行：
-git filter-branch --index-filter &#39;git rm --cached --ignore-unmatch src/components/Emoji/emoji.png&#39;">
+  <meta property="og:title" content="记 Git 目录体积过大的优化方案">
+  <meta property="og:description" content="一次优化 Git 历史提交中包含对大文件引用的过程">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -68,7 +59,7 @@ git filter-branch --index-filter &#39;git rm --cached --ignore-unmatch sr
 
 
 
-<link rel="stylesheet" href="/assets/combined.min.04fb0b353b0d1d2950e7fec6d105b7e72b3ec97dd6e8d4e77c0aebdf0715425b.css" media="all">
+<link rel="stylesheet" href="/assets/combined.min.403fefeb55ad9a9e72af41abf4538457b584695b1fdcef661626b87d8b07dec9.css" media="all">
 
 
 
@@ -132,26 +123,48 @@ git filter-branch --index-filter &#39;git rm --cached --ignore-unmatch sr
 
 
 <div class="breadcrumbs"><a href="/">Home</a><span class="breadcrumbs-separator">/</span><a href="/posts/">Posts</a><span class="breadcrumbs-separator">/</span>
-        <a href="/posts/git-slim/">清理 Git 文件夹过期引用</a></div>
+        <a href="/posts/git-slim/">记 Git 目录体积过大的优化方案</a></div>
 
 
-<div >
+<div  class="autonumber" >
   <article>
     <header class="single-intro-container">
         
-        <h1 class="single-title">清理 Git 文件夹过期引用</h1>
+        <h1 class="single-title">记 Git 目录体积过大的优化方案</h1>
+        <p class="single-summary">一次优化 Git 历史提交中包含对大文件引用的过程</p>
         
         <div class="single-subsummary">
           
           <div>
             
             <p class="single-date">
-              <time datetime="2022-12-20T17:03:14&#43;08:00">December 20, 2022</time>
+              <time datetime="2022-12-20T17:03:14&#43;08:00">2022-12-20</time>
+              &nbsp; · &nbsp;1 min read
             </p>
           </div>
         </div>
         
     </header>
+      <aside class="toc">
+        <p><strong>Table of contents</strong></p>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#踩坑方案一">踩坑方案一</a>
+      <ul>
+        <li><a href="#识别查询大文件">识别查询大文件</a></li>
+        <li><a href="#删除文件">删除文件</a></li>
+        <li><a href="#推送到远程">推送到远程</a></li>
+      </ul>
+    </li>
+    <li><a href="#终极方案二">终极方案二</a>
+      <ul>
+        <li><a href="#安装-git-filter-pro">安装 git-filter-pro</a></li>
+        <li><a href="#如何使用">如何使用</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+      </aside>
     
     <div class="single-content">
       <p>Git 版本仓库提交过多，会导致项目根目录下的 <code>.git</code> 文件夹体积巨大，原因可能不只是单纯的提交历史过多，而是历史提交中包含有对大文件的引用，即使现在的项目中已经不存在这些文件了，但其引用关联依旧会被 <code>git</code> 保留下来。</p>
@@ -226,9 +239,9 @@ git filter-branch --index-filter &#39;git rm --cached --ignore-unmatch sr
   <a class="anchor" href="#%e7%bb%88%e6%9e%81%e6%96%b9%e6%a1%88%e4%ba%8c">#</a>
 </h2>
 <p><code>git</code> 官方文档推荐了这个库： <a href="https://github.com/newren/git-filter-repo">git-filter-pro</a> ，它是一个可以重写 git 历史的多功能 <code>Python</code> 脚本，即使现在在项目当中找不到那些历史文件，它依然可以找到它们并进行清理（看来这才是我想要的东西）。</p>
-<h3 class="heading" id="安装">
-  安装
-  <a class="anchor" href="#%e5%ae%89%e8%a3%85">#</a>
+<h3 class="heading" id="安装-git-filter-pro">
+  安装 git-filter-pro
+  <a class="anchor" href="#%e5%ae%89%e8%a3%85-git-filter-pro">#</a>
 </h3>
 <blockquote>
 <p><code>brew install git-filter-repo</code></p></blockquote>
@@ -239,9 +252,9 @@ git filter-branch --index-filter &#39;git rm --cached --ignore-unmatch sr
 <blockquote>
 <p>原因是使用国内镜像但是该镜像未完全同步的问题，临时去除镜像即可：
 <code>export HOMEBREW_BOTTLE_DOMAIN=''</code></p></blockquote>
-<h3 class="heading" id="使用">
-  使用
-  <a class="anchor" href="#%e4%bd%bf%e7%94%a8">#</a>
+<h3 class="heading" id="如何使用">
+  如何使用
+  <a class="anchor" href="#%e5%a6%82%e4%bd%95%e4%bd%bf%e7%94%a8">#</a>
 </h3>
 <p>这里可以搭配此命令来找到那些历史中的大文件，然后逐一清理。</p>
 <blockquote>
@@ -313,25 +326,6 @@ git filter-branch --index-filter &#39;git rm --cached --ignore-unmatch sr
 
     </div>
   </article>
-    <div class="single-comments">
-      <script src="https://giscus.app/client.js"
-        data-repo="https://github.com/flyingmylo/mylofi.github.io.git"
-        data-repo-id="repoId"
-        data-category=""
-        data-category-id="categoryId"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="top"
-        data-theme="preferred_color_scheme"
-        data-lang="en"
-        data-loading="lazy"
-        crossorigin="anonymous"
-        async>
-</script>
-
-    </div>
 
   
 
@@ -363,7 +357,7 @@ git filter-branch --index-filter &#39;git rm --cached --ignore-unmatch sr
             <div class="single-pagination-container-next">
                 <div class="single-pagination-text">
                     <a href="/posts/nginx-conf/">
-                        使用 nginx 部署一个 hello world
+                        使用 Nginx 部署一个静态页面
                     </a>
                 </div>
                 <div class="single-pagination-text">→</div>

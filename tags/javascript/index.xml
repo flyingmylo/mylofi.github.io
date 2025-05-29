@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Javascript on </title>
+    <link>http://mylofi.fun/tags/javascript/</link>
+    <description>Recent content in Javascript on </description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 10 Jun 2022 12:44:17 +0800</lastBuildDate>
+    <atom:link href="http://mylofi.fun/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Javascript 之原型链</title>
+      <link>http://mylofi.fun/posts/prototype/</link>
+      <pubDate>Fri, 10 Jun 2022 12:44:17 +0800</pubDate>
+      <guid>http://mylofi.fun/posts/prototype/</guid>
+      <description>巩固复习一下 Javascript 原型链的知识</description>
+    </item>
+  </channel>
+</rss>

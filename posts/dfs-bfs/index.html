@@ -20,11 +20,11 @@
 
 
 
-<link rel="icon" type="image/ico" href="http://mylofi.fun/static/favicon.ico/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://mylofi.fun/static/favicon.ico/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://mylofi.fun/static/favicon.ico/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="192x192" href="http://mylofi.fun/static/favicon.ico/android-chrome-192x192.png">
-<link rel="apple-touch-icon" sizes="180x180" href="http://mylofi.fun/static/favicon.ico/apple-touch-icon.png">
+<link rel="icon" type="image/ico" href="http://mylofi.fun/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://mylofi.fun/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://mylofi.fun/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="http://mylofi.fun/android-chrome-192x192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="http://mylofi.fun/apple-touch-icon.png">
 
 <meta name="description" content=""/>
 
@@ -32,22 +32,15 @@
 
 <title>
     
-    算法之深度优先搜索与广度优先搜索 | ⚽️
+    算法之深度优先搜索与广度优先搜索 | 
     
 </title>
 
 <link rel="canonical" href="http://mylofi.fun/posts/dfs-bfs/"/>
 
 <meta property="og:url" content="http://mylofi.fun/posts/dfs-bfs/">
-  <meta property="og:site_name" content="⚽️">
   <meta property="og:title" content="算法之深度优先搜索与广度优先搜索">
-  <meta property="og:description" content="深度优先搜索 DFS # 深度优先搜索（Depth-First-Search）和广度优先搜索（Breadth-First-Search）都是一种用来遍历或者搜索树或图这种数据结构的算法。以树为例，深度优先搜索的过程会从根节点出发，尽可能深地遍历每个子节点，而且每个节点只能访问一次，是一个不断回溯的过程。
-实现方法大致如下：
-首先将根节点放入栈中 从栈中取出第一个节点，并检验它是否为目标 如果找到目标，则结束搜索并返回结果 否则将它某一个尚未检验过的直接子节点放入栈中 重复步骤 2 如果不存在未检测过的直接子节点 将上一级节点放入栈中 重复步骤 2 重复步骤 4 若栈为空，表示整张图都已检查过并且没有要查找的目标，结束搜索 另外需要我们了解的一种数据结构：栈。
-我们可以把盏比喻成一包手帕纸，每张纸巾都是按序一张一张放进去的，使用的时候是一张一张从最上边开始拿出来的。所以栈是一种后进先出（Last In First Out, LIFO）的数据结构。
-示例：通过 DFS 实现复制对象的复制
-const copyDFS = function(obj) { if (obj === null || typeof obj !== &#34;object&#34;) { return obj; } const copyObj = Array.isArray(obj) ? [] : {}; for (const key in obj) { copyObj[key] = copyDFS(obj[key]); } return copyObj; } 示例：获取对象的所有键
-const obj = { a: 1, b: 2, c: { d: 4, e: 5} } function dfs(obj, keys = []) { Object.entries(obj).forEach(([k, v]) =&gt; { keys.push(k) if (typeof v === &#39;object&#39;) dfs(v, keys) else return }) return keys } // [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;, &#39;f&#39;] console.log(dfs(obj)) 广度优先搜索 BFS # 广度优先搜索（Breadth-First-Search）也会沿着树的宽度进行遍历，通常用来解决两种问题：">
+  <meta property="og:description" content="深度优先与广度优先的概念和区别">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -66,7 +59,7 @@ const obj = { a: 1, b: 2, c: { d: 4, e: 5} } function dfs(obj, keys = []) { Obje
 
 
 
-<link rel="stylesheet" href="/assets/combined.min.04fb0b353b0d1d2950e7fec6d105b7e72b3ec97dd6e8d4e77c0aebdf0715425b.css" media="all">
+<link rel="stylesheet" href="/assets/combined.min.403fefeb55ad9a9e72af41abf4538457b584695b1fdcef661626b87d8b07dec9.css" media="all">
 
 
 
@@ -138,18 +131,24 @@ const obj = { a: 1, b: 2, c: { d: 4, e: 5} } function dfs(obj, keys = []) { Obje
     <header class="single-intro-container">
         
         <h1 class="single-title">算法之深度优先搜索与广度优先搜索</h1>
+        <p class="single-summary">深度优先与广度优先的概念和区别</p>
         
         <div class="single-subsummary">
           
           <div>
             
             <p class="single-date">
-              <time datetime="2022-07-07T21:27:33&#43;08:00">July 7, 2022</time>
+              <time datetime="2022-07-07T21:27:33&#43;08:00">2022-07-07</time>
+              &nbsp; · &nbsp;2 min read
             </p>
           </div>
         </div>
         
-    </header>
+    </header>    
+        <div class="single-tags"><span>
+                  <a href="http://mylofi.fun/tags/%E7%AE%97%E6%B3%95/">#算法</a>
+                </span>
+        </div>
       <aside class="toc">
         <p><strong>Table of contents</strong></p>
         <nav id="TableOfContents">
@@ -321,25 +320,6 @@ const obj = { a: 1, b: 2, c: { d: 4, e: 5} } function dfs(obj, keys = []) { Obje
 </span></span></span></code></pre></div>
     </div>
   </article>
-    <div class="single-comments">
-      <script src="https://giscus.app/client.js"
-        data-repo="https://github.com/flyingmylo/mylofi.github.io.git"
-        data-repo-id="repoId"
-        data-category=""
-        data-category-id="categoryId"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="top"
-        data-theme="preferred_color_scheme"
-        data-lang="en"
-        data-loading="lazy"
-        crossorigin="anonymous"
-        async>
-</script>
-
-    </div>
 
   
 
@@ -358,8 +338,8 @@ const obj = { a: 1, b: 2, c: { d: 4, e: 5} } function dfs(obj, keys = []) { Obje
             <div class="single-pagination-container-prev">
                 <div class="single-pagination-text">←</div>
                 <div class="single-pagination-text">
-                    <a href="/posts/inside-look-at-modern-web-browser-2/">
-                        深入了解现代网络浏览器（2/4）【译】
+                    <a href="/posts/prototype/">
+                        Javascript 之原型链
                     </a>
                 </div>
             </div>

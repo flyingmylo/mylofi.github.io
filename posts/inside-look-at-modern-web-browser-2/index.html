@@ -20,11 +20,11 @@
 
 
 
-<link rel="icon" type="image/ico" href="http://mylofi.fun/static/favicon.ico/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://mylofi.fun/static/favicon.ico/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://mylofi.fun/static/favicon.ico/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="192x192" href="http://mylofi.fun/static/favicon.ico/android-chrome-192x192.png">
-<link rel="apple-touch-icon" sizes="180x180" href="http://mylofi.fun/static/favicon.ico/apple-touch-icon.png">
+<link rel="icon" type="image/ico" href="http://mylofi.fun/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://mylofi.fun/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://mylofi.fun/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="http://mylofi.fun/android-chrome-192x192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="http://mylofi.fun/apple-touch-icon.png">
 
 <meta name="description" content=""/>
 
@@ -32,19 +32,15 @@
 
 <title>
     
-    深入了解现代网络浏览器（2/4）【译】 | ⚽️
+    深入了解现代网络浏览器（2/4）【译】 | 
     
 </title>
 
 <link rel="canonical" href="http://mylofi.fun/posts/inside-look-at-modern-web-browser-2/"/>
 
 <meta property="og:url" content="http://mylofi.fun/posts/inside-look-at-modern-web-browser-2/">
-  <meta property="og:site_name" content="⚽️">
   <meta property="og:title" content="深入了解现代网络浏览器（2/4）【译】">
-  <meta property="og:description" content="导航栏里都发生了些什么 # 这是 4 篇博客系列中的第 2 篇，来窥探 Chrome 的内部工作原理。在上一篇文章中，我们探讨了进程和线程在处理浏览器不同模块时的区别。本篇文章我们将会更深层次地挖掘线程和进程为了渲染一个网站是如何进行有序通信的。
-我们来看一个浏览器里简单的例子：在浏览器中输入一个 URL 地址，接着浏览器会从网络中请求数据然后渲染出一个页面。在这篇文章中，我们将会聚焦于用户请求一个站点随后浏览器准备渲染页面这一部分，也就是我们熟知的导航。
-始于一个浏览器进程 # 正如我们已经在 上篇中阐述过的 GPU/CPU/内存/多进程架构 一样，浏览器进程处理了其每个标签页的所有任务。浏览器进程拥有像 UI 线程这样绘制按钮或者输入框的进程，还有网络线程从网络中接收数据，存储线程控制文件的访问等等这些进程。当我们在地址栏中输入一个 URL 地址时，我们的输入就会被浏览器进程里的 UI 线程处理。 图1：上方是浏览器的用户界面，下方则是浏览器进程的示意图，其中包含了用户界面、网络和存储线程。 一个简单的导航 # 第一步：处理输入 # 当用户开始在地址栏中输入的时候，UI 线程首要询问的是“这是一个搜索关键词还是一个地址咧？”。在 Chrome 中，地址栏同样是一个搜索框，所以 UI 线程需要解析并且决定是要把输入发送给搜索引擎，还是直接显示这个你请求的网站。 图2：UI 线程询问此输入是搜索关键字还是一个地址 第二步：开始导航 # 当用户敲了回车键，UI 线程会初始化一个网络命令去获取网站内容，此时在标签页的左上角会显示一个转圈圈的加载器 ，随后网络线程会通过合适的协议，比如 DNS 查询为该请求建立 TLS 链接。 图3：UI 线程与网络线程通信，以导航到 mysite.com 站点 此时网络进程可能会收到一个服务器的重定向头信息，比如 HTTP 301 ，这种情况下，网络线程就会和 UI 线程对于服务器正在请求重定向进行通信，然后向另一个 URL 发起请求。
-第三步：读取响应 # 当响应正文开始返回的时候，网络线程就会在必要时查看字节流的前几个字节，响应头中的 Content-Type 字段说明了数据的类型，但是由于它可能会出错或是不准确，所以此处会有一个 MIME Type Sniffing 检查来确认该数据是什么类型。这算是 源码 中提到的一个“小花招”，具体可以参见文章中的注释以了解不同的浏览器是如何处理 content-type/payload 的。 图4：响应头包含了 Content-Type 用以说明数据类型，而 payload 表示真实传输的数据">
+  <meta property="og:description" content="一个通过翻译的方式学习英语的尝试计划">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -63,7 +59,7 @@
 
 
 
-<link rel="stylesheet" href="/assets/combined.min.04fb0b353b0d1d2950e7fec6d105b7e72b3ec97dd6e8d4e77c0aebdf0715425b.css" media="all">
+<link rel="stylesheet" href="/assets/combined.min.403fefeb55ad9a9e72af41abf4538457b584695b1fdcef661626b87d8b07dec9.css" media="all">
 
 
 
@@ -130,18 +126,20 @@
         <a href="/posts/inside-look-at-modern-web-browser-2/">深入了解现代网络浏览器（2/4）【译】</a></div>
 
 
-<div >
+<div  class="autonumber" >
   <article>
     <header class="single-intro-container">
         
         <h1 class="single-title">深入了解现代网络浏览器（2/4）【译】</h1>
+        <p class="single-summary">一个通过翻译的方式学习英语的尝试计划</p>
         
         <div class="single-subsummary">
           
           <div>
             
             <p class="single-date">
-              <time datetime="2022-05-28T17:27:11&#43;08:00">May 28, 2022</time>
+              <time datetime="2022-05-28T17:27:11&#43;08:00">2022-05-28</time>
+              &nbsp; · &nbsp;2 min read
             </p>
           </div>
         </div>
@@ -458,25 +456,6 @@
 
     </div>
   </article>
-    <div class="single-comments">
-      <script src="https://giscus.app/client.js"
-        data-repo="https://github.com/flyingmylo/mylofi.github.io.git"
-        data-repo-id="repoId"
-        data-category=""
-        data-category-id="categoryId"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="top"
-        data-theme="preferred_color_scheme"
-        data-lang="en"
-        data-loading="lazy"
-        crossorigin="anonymous"
-        async>
-</script>
-
-    </div>
 
   
 
@@ -507,8 +486,8 @@
             
             <div class="single-pagination-container-next">
                 <div class="single-pagination-text">
-                    <a href="/posts/dfs-bfs/">
-                        算法之深度优先搜索与广度优先搜索
+                    <a href="/posts/prototype/">
+                        Javascript 之原型链
                     </a>
                 </div>
                 <div class="single-pagination-text">→</div>

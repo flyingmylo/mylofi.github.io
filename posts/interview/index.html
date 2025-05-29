@@ -20,11 +20,11 @@
 
 
 
-<link rel="icon" type="image/ico" href="http://mylofi.fun/static/favicon.ico/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://mylofi.fun/static/favicon.ico/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://mylofi.fun/static/favicon.ico/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="192x192" href="http://mylofi.fun/static/favicon.ico/android-chrome-192x192.png">
-<link rel="apple-touch-icon" sizes="180x180" href="http://mylofi.fun/static/favicon.ico/apple-touch-icon.png">
+<link rel="icon" type="image/ico" href="http://mylofi.fun/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://mylofi.fun/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://mylofi.fun/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="http://mylofi.fun/android-chrome-192x192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="http://mylofi.fun/apple-touch-icon.png">
 
 <meta name="description" content=""/>
 
@@ -32,22 +32,21 @@
 
 <title>
     
-    面经记录 | ⚽️
+    面经记录 | 
     
 </title>
 
 <link rel="canonical" href="http://mylofi.fun/posts/interview/"/>
 
 <meta property="og:url" content="http://mylofi.fun/posts/interview/">
-  <meta property="og:site_name" content="⚽️">
   <meta property="og:title" content="面经记录">
-  <meta property="og:description" content="vue 相关 # mixin 相关场景以及利弊，拥有多个属性时的执行顺序， v-model 原理，在下拉选择器组件中是怎么实现的 filter 怎么实现，使用场景 插槽的实现原理，如何传值 v-for 中 key 的作用，延伸到 diff 实现，不同位置的比较 vnode 概念 v-if 控制 dom 显隐时， vdom 是如何处理的 watch 监听是的 deep: true 实现原理 nextTick 原理 computed 和 watch 的区别 Vue.use 和 Vue.install Vue 中手动 extend data 中的属性是定义在 MVVM 中的哪个环节 css 相关 # 回流和重绘的概念，绝对定位是否会导致回流 flex: 1 的分别代表什么属性以及作用 伪元素和伪类的区别，分别有哪些 visibility: hidden 和 opacity 是否触发点击事件 js 相关 # let/const/var 区别，用 const 声明对象时，是否可以改变对象的属性值，为什么 深度优先搜索和广度优先搜索 如何证明 js 对象里存在循环引用 类型判断的方法，typeof 对象的类属性 实例对象是否是 Function ，instanceof Function 结果 promise 执行顺序，事件循环 es5 模拟 class 的实现 localStorage 如何实现过期时间 手机号正则 工程化相关 # 介绍 webpack 常用的配置以及功能 webpack 多页面有多个入口时如何配置 source-map 分类，如何配置和调试 webpack 中怎么隔离 css 性能优化方案，代码/打包/资源加载方面 热更新原理 概念类问题 # http/https 区别 介绍 options 请求的意义 MVVM/MVC 的区别，如何实现一个 MVVM 简述 XSS 和 CSRF 的概念，并列举几种安全防范策略 编程题 # 编写一个函数，大小写字母取反 const fn = (string) =&gt; { let ans = &#39;&#39; for (let v of string) { ans &#43;= v.toLowerCase() === v ? v.toUpperCase() : v.toLowerCase() } return ans } 编写一个函数，输入 int 型，返回整数逆序后的字符串 二维数组扁平化，返回一个去重且是升序的一维数组 场景题 # 数据多、加载慢的解决方式 缓存 懒加载 生产环境发布后，发现客户那边并没有更新到最新版，从哪些方面排查？ 时间戳保持最新 强缓存/协商缓存 禁止缓存 axios 需要对所有接口进行增加请求头之类的字段时，怎么处理？ 一个按钮含有异步请求，如何防止多次点击重复提交？ 防抖及其实现，引申节流，描述区别及使用场景 增加禁用属性，loading/disabled a 页面跳转到 b 页面然后重定向到 c 页面，可能会在 b 页面做登录逻辑或者记录数据（相当于一个中转页）， 但是用户可能直接在地址栏里输入 c 页面，怎么防止这个情况？ 路由守卫 导航拦截如何实现 同一个浏览器，不同标签之间数据传递的方法，简单列举 发散性问题 # 职业规划 怎么制定技术方案，从哪几个方面考虑">
+  <meta property="og:description" content="记录疫情解封后的一次面试题">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2022-07-13T21:27:03+08:00">
     <meta property="article:modified_time" content="2022-07-13T21:27:03+08:00">
-    <meta property="article:tag" content="Notes">
+    <meta property="article:tag" content="笔记">
 
 
 
@@ -60,7 +59,7 @@
 
 
 
-<link rel="stylesheet" href="/assets/combined.min.04fb0b353b0d1d2950e7fec6d105b7e72b3ec97dd6e8d4e77c0aebdf0715425b.css" media="all">
+<link rel="stylesheet" href="/assets/combined.min.403fefeb55ad9a9e72af41abf4538457b584695b1fdcef661626b87d8b07dec9.css" media="all">
 
 
 
@@ -132,18 +131,24 @@
     <header class="single-intro-container">
         
         <h1 class="single-title">面经记录</h1>
+        <p class="single-summary">记录疫情解封后的一次面试题</p>
         
         <div class="single-subsummary">
           
           <div>
             
             <p class="single-date">
-              <time datetime="2022-07-13T21:27:03&#43;08:00">July 13, 2022</time>
+              <time datetime="2022-07-13T21:27:03&#43;08:00">2022-07-13</time>
+              &nbsp; · &nbsp;1 min read
             </p>
           </div>
         </div>
         
-    </header>
+    </header>    
+        <div class="single-tags"><span>
+                  <a href="http://mylofi.fun/tags/%E7%AC%94%E8%AE%B0/">#笔记</a>
+                </span>
+        </div>
     
     <div class="single-content">
       <h3 class="heading" id="vue-相关">
@@ -275,25 +280,6 @@
 
     </div>
   </article>
-    <div class="single-comments">
-      <script src="https://giscus.app/client.js"
-        data-repo="https://github.com/flyingmylo/mylofi.github.io.git"
-        data-repo-id="repoId"
-        data-category=""
-        data-category-id="categoryId"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="top"
-        data-theme="preferred_color_scheme"
-        data-lang="en"
-        data-loading="lazy"
-        crossorigin="anonymous"
-        async>
-</script>
-
-    </div>
 
   
 
@@ -325,7 +311,7 @@
             <div class="single-pagination-container-next">
                 <div class="single-pagination-text">
                     <a href="/posts/git-slim/">
-                        清理 Git 文件夹过期引用
+                        记 Git 目录体积过大的优化方案
                     </a>
                 </div>
                 <div class="single-pagination-text">→</div>

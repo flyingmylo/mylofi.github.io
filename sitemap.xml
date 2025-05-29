@@ -2,23 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://mylofi.fun/tags/database/</loc>
-    <lastmod>2023-11-12T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>http://mylofi.fun/</loc>
-    <lastmod>2023-11-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://mylofi.fun/tags/java/</loc>
-    <lastmod>2023-11-12T00:00:00+00:00</lastmod>
+    <lastmod>2024-11-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://mylofi.fun/posts/</loc>
-    <lastmod>2023-11-12T00:00:00+00:00</lastmod>
+    <lastmod>2024-11-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://mylofi.fun/tags/</loc>
-    <lastmod>2023-11-12T00:00:00+00:00</lastmod>
+    <lastmod>2024-11-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://mylofi.fun/posts/2024-11-28-take-up-running/</loc>
-    <lastmod>2023-11-12T00:00:00+00:00</lastmod>
+    <lastmod>2024-11-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://mylofi.fun/tags/%E8%BF%90%E5%8A%A8/</loc>
+    <lastmod>2024-11-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://mylofi.fun/tags/%E9%9A%8F%E6%83%B3/</loc>
+    <lastmod>2024-11-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://mylofi.fun/tags/nginx/</loc>
     <lastmod>2023-03-28T20:54:28+08:00</lastmod>
@@ -32,7 +32,7 @@
     <loc>http://mylofi.fun/posts/git-slim/</loc>
     <lastmod>2022-12-20T17:03:14+08:00</lastmod>
   </url><url>
-    <loc>http://mylofi.fun/tags/notes/</loc>
+    <loc>http://mylofi.fun/tags/%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2022-07-13T21:27:03+08:00</lastmod>
   </url><url>
     <loc>http://mylofi.fun/posts/interview/</loc>
@@ -44,6 +44,12 @@
     <loc>http://mylofi.fun/posts/dfs-bfs/</loc>
     <lastmod>2022-07-07T21:27:33+08:00</lastmod>
   </url><url>
+    <loc>http://mylofi.fun/tags/javascript/</loc>
+    <lastmod>2022-06-10T12:44:17+08:00</lastmod>
+  </url><url>
+    <loc>http://mylofi.fun/posts/prototype/</loc>
+    <lastmod>2022-06-10T12:44:17+08:00</lastmod>
+  </url><url>
     <loc>http://mylofi.fun/posts/inside-look-at-modern-web-browser-2/</loc>
     <lastmod>2022-05-28T17:27:11+08:00</lastmod>
   </url><url>
@@ -53,8 +59,38 @@
     <loc>http://mylofi.fun/posts/inside-look-at-modern-web-browser-1/</loc>
     <lastmod>2022-05-18T23:40:32+08:00</lastmod>
   </url><url>
+    <loc>http://mylofi.fun/tags/%E8%8B%B1%E8%AF%AD/</loc>
+    <lastmod>2022-05-18T23:40:32+08:00</lastmod>
+  </url><url>
+    <loc>http://mylofi.fun/posts/common-people/</loc>
+    <lastmod>2019-12-27T19:41:41+08:00</lastmod>
+  </url><url>
+    <loc>http://mylofi.fun/tags/%E9%9A%8F%E7%AC%94/</loc>
+    <lastmod>2019-12-27T19:41:41+08:00</lastmod>
+  </url><url>
+    <loc>http://mylofi.fun/posts/now-close-the-windows/</loc>
+    <lastmod>2019-08-12T17:13:48+08:00</lastmod>
+  </url><url>
+    <loc>http://mylofi.fun/tags/%E6%91%98%E6%8A%84/</loc>
+    <lastmod>2019-08-12T17:13:48+08:00</lastmod>
+  </url><url>
+    <loc>http://mylofi.fun/tags/%E8%AF%97/</loc>
+    <lastmod>2019-08-12T17:13:48+08:00</lastmod>
+  </url><url>
+    <loc>http://mylofi.fun/posts/answer/</loc>
+    <lastmod>2019-08-12T14:10:13+08:00</lastmod>
+  </url><url>
     <loc>http://mylofi.fun/posts/git-command/</loc>
     <lastmod>2019-07-18T15:30:06+08:00</lastmod>
+  </url><url>
+    <loc>http://mylofi.fun/tags/%E5%88%9B%E4%BD%9C/</loc>
+    <lastmod>2019-06-03T17:51:27+08:00</lastmod>
+  </url><url>
+    <loc>http://mylofi.fun/tags/%E8%99%9A%E6%9E%84/</loc>
+    <lastmod>2019-06-03T17:51:27+08:00</lastmod>
+  </url><url>
+    <loc>http://mylofi.fun/posts/station/</loc>
+    <lastmod>2019-06-03T17:51:27+08:00</lastmod>
   </url><url>
     <loc>http://mylofi.fun/about/</loc>
     <lastmod>2019-04-02T16:02:13+08:00</lastmod>

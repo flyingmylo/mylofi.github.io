@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>随笔 on </title>
+    <link>http://mylofi.fun/tags/%E9%9A%8F%E7%AC%94/</link>
+    <description>Recent content in 随笔 on </description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 27 Dec 2019 19:41:41 +0800</lastBuildDate>
+    <atom:link href="http://mylofi.fun/tags/%E9%9A%8F%E7%AC%94/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>普通的人</title>
+      <link>http://mylofi.fun/posts/common-people/</link>
+      <pubDate>Fri, 27 Dec 2019 19:41:41 +0800</pubDate>
+      <guid>http://mylofi.fun/posts/common-people/</guid>
+      <description>一次胡思乱想的记录：相对于大城市里的生活，反而小城镇里的人们更有使命感</description>
+    </item>
+  </channel>
+</rss>

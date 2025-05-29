@@ -20,11 +20,11 @@
 
 
 
-<link rel="icon" type="image/ico" href="http://mylofi.fun/static/favicon.ico/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://mylofi.fun/static/favicon.ico/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://mylofi.fun/static/favicon.ico/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="192x192" href="http://mylofi.fun/static/favicon.ico/android-chrome-192x192.png">
-<link rel="apple-touch-icon" sizes="180x180" href="http://mylofi.fun/static/favicon.ico/apple-touch-icon.png">
+<link rel="icon" type="image/ico" href="http://mylofi.fun/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://mylofi.fun/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://mylofi.fun/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="http://mylofi.fun/android-chrome-192x192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="http://mylofi.fun/apple-touch-icon.png">
 
 <meta name="description" content=""/>
 
@@ -32,22 +32,15 @@
 
 <title>
     
-    使用 nginx 部署一个 hello world | ⚽️
+    使用 Nginx 部署一个静态页面 | 
     
 </title>
 
 <link rel="canonical" href="http://mylofi.fun/posts/nginx-conf/"/>
 
 <meta property="og:url" content="http://mylofi.fun/posts/nginx-conf/">
-  <meta property="og:site_name" content="⚽️">
-  <meta property="og:title" content="使用 nginx 部署一个 hello world">
-  <meta property="og:description" content="上传静态资源 # 首先把本地的一个 index.html 文件上传至服务器，然后发布进行访问。
-首先进入到 root 目录下新建 www 文件夹
-cd /root &amp;&amp; mkdir www 然后在本地执行以下命令，将 index.html 文件上传至 /root/www 目录下：
-// 上传本地文件 scp index.html root@123.249.15.191:/root/www 其他文件传输操作：
-上传本地目录到服务器：scp -r dist root@123.249.15.191:/root/www 从服务器下载文件：scp root@123.249.15.191:/root/www/index.html 从服务器下载目录：scp -r root@123.249.15.191:/root/www /var/www 安装 nginx # 执行命令以检查 yum 源中是否存在 nginx 包：
-yum list nginx 已安装的示例图 使用 yum 安装 nginx：
-yum install -y nginx 出现 Complete! 提示即安装成功： 已安装的示例图 此时我们可以通过浏览器访问服务器地址，会看到 nginx 默认页面，如下： nginx 默认页面 配置 nginx # 执行以下命令进入 nginx 目录，并修改配置：">
+  <meta property="og:title" content="使用 Nginx 部署一个静态页面">
+  <meta property="og:description" content="在服务器上使用 Nginx 部署一个 Hello World">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -66,7 +59,7 @@ yum install -y nginx 出现 Complete! 提示即安装成功： 已安装的示�
 
 
 
-<link rel="stylesheet" href="/assets/combined.min.04fb0b353b0d1d2950e7fec6d105b7e72b3ec97dd6e8d4e77c0aebdf0715425b.css" media="all">
+<link rel="stylesheet" href="/assets/combined.min.403fefeb55ad9a9e72af41abf4538457b584695b1fdcef661626b87d8b07dec9.css" media="all">
 
 
 
@@ -130,26 +123,32 @@ yum install -y nginx 出现 Complete! 提示即安装成功： 已安装的示�
 
 
 <div class="breadcrumbs"><a href="/">Home</a><span class="breadcrumbs-separator">/</span><a href="/posts/">Posts</a><span class="breadcrumbs-separator">/</span>
-        <a href="/posts/nginx-conf/">使用 nginx 部署一个 hello world</a></div>
+        <a href="/posts/nginx-conf/">使用 Nginx 部署一个静态页面</a></div>
 
 
 <div >
   <article>
     <header class="single-intro-container">
         
-        <h1 class="single-title">使用 nginx 部署一个 hello world</h1>
+        <h1 class="single-title">使用 Nginx 部署一个静态页面</h1>
+        <p class="single-summary">在服务器上使用 Nginx 部署一个 Hello World</p>
         
         <div class="single-subsummary">
           
           <div>
             
             <p class="single-date">
-              <time datetime="2023-03-28T20:54:28&#43;08:00">March 28, 2023</time>
+              <time datetime="2023-03-28T20:54:28&#43;08:00">2023-03-28</time>
+              &nbsp; · &nbsp;2 min read
             </p>
           </div>
         </div>
         
-    </header>
+    </header>    
+        <div class="single-tags"><span>
+                  <a href="http://mylofi.fun/tags/nginx/">#Nginx</a>
+                </span>
+        </div>
     
     <div class="single-content">
       <h3 class="heading" id="上传静态资源">
@@ -389,7 +388,7 @@ vim nginx.conf
     
 </figure>
 </p>
-<p>1⃣️ 首先，我们通过 <code>ps aux | grep nginx</code> 命令查看当前 nginx 的运行进程：
+<p>1.首先，我们通过 <code>ps aux | grep nginx</code> 命令查看当前 nginx 的运行进程：
 
 
 
@@ -415,10 +414,10 @@ vim nginx.conf
     
 </figure>
 </p>
-<p>2⃣️ 其次，我们修改上文配置中的第一行：</p>
+<p>2.其次，我们修改上文配置中的第一行：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span><span style="color:#888;font-style:italic"># 将用户名 nginx 改为 root</span>
 </span></span><span style="display:flex;"><span>user root<span style="">;</span>
-</span></span></code></pre></div><p>3⃣️ 最后，执行 <code>nginx -s reload</code> 重启 nginx ，再次打开页面看到已经可以正常访问：
+</span></span></code></pre></div><p>3.最后，执行 <code>nginx -s reload</code> 重启 nginx ，再次打开页面看到已经可以正常访问：
 
 
 
@@ -457,25 +456,6 @@ vim nginx.conf
 
     </div>
   </article>
-    <div class="single-comments">
-      <script src="https://giscus.app/client.js"
-        data-repo="https://github.com/flyingmylo/mylofi.github.io.git"
-        data-repo-id="repoId"
-        data-category=""
-        data-category-id="categoryId"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="top"
-        data-theme="preferred_color_scheme"
-        data-lang="en"
-        data-loading="lazy"
-        crossorigin="anonymous"
-        async>
-</script>
-
-    </div>
 
   
 
@@ -495,7 +475,7 @@ vim nginx.conf
                 <div class="single-pagination-text">←</div>
                 <div class="single-pagination-text">
                     <a href="/posts/git-slim/">
-                        清理 Git 文件夹过期引用
+                        记 Git 目录体积过大的优化方案
                     </a>
                 </div>
             </div>

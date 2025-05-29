@@ -20,11 +20,11 @@
 
 
 
-<link rel="icon" type="image/ico" href="http://mylofi.fun/static/favicon.ico/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://mylofi.fun/static/favicon.ico/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://mylofi.fun/static/favicon.ico/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="192x192" href="http://mylofi.fun/static/favicon.ico/android-chrome-192x192.png">
-<link rel="apple-touch-icon" sizes="180x180" href="http://mylofi.fun/static/favicon.ico/apple-touch-icon.png">
+<link rel="icon" type="image/ico" href="http://mylofi.fun/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://mylofi.fun/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://mylofi.fun/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="http://mylofi.fun/android-chrome-192x192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="http://mylofi.fun/apple-touch-icon.png">
 
 <meta name="description" content=""/>
 
@@ -32,28 +32,22 @@
 
 <title>
     
-    深入了解现代网络浏览器（1/4）【译】 | ⚽️
+    深入了解现代网络浏览器（1/4）【译】 | 
     
 </title>
 
 <link rel="canonical" href="http://mylofi.fun/posts/inside-look-at-modern-web-browser-1/"/>
 
 <meta property="og:url" content="http://mylofi.fun/posts/inside-look-at-modern-web-browser-1/">
-  <meta property="og:site_name" content="⚽️">
   <meta property="og:title" content="深入了解现代网络浏览器（1/4）【译】">
-  <meta property="og:description" content="📌 本篇原文发表于 2018.09.05，正文中出现的有关于时间概念的语句，阅读时请注意切换语境。 👉🏻原文链接
-中央处理器/图形处理器/内存/多进程架构 # 在这个包含 4 篇文章的博客系列中，我们将从高阶架构到具体的渲染细节来深入 Chrome 浏览器内部了解其是怎么运作的。如果你曾经好奇浏览器是怎么把代码转变成一个功能齐备的网站，或者你并不确定为什么一个具体的技术细节能够带来性能提升，那么这个系列正好是为你准备的。
-作为系列第一篇，我们将会了解一些核心的计算机术语和 Chrome 浏览器的多进程架构。如果你对 CPU/GPU 和 进程/线程已经很熟悉，可以直接跳到 浏览器架构 章节。
-计算机的核心 - CPU 和 GPU # 为了理解浏览器所运行的环境，我们需要先了解计算机的一些部件以及它们是做什么的。
-中央处理器 CPU # 首先是中央处理器（CPU, Central Processing Unit）。CPU 可以被看作是一台计算机的大脑，一个 CPU 内核可以想象成一位办公室工作人员，能够处理一个接一个被安排的多个任务，可以处理一切从数学甚至到艺术领域的难题，而且它知道如何去响应一个用户的指令。以前的大多数 CPU 都是单个芯片，一个内核就相当于是一个 CPU 被嵌入到一个芯片上。在现代的硬件条件下，出现了多核处理器，也赋予了手机、笔记本更强的计算能力。
-图 1：四个 CPU 内核就像彼此相邻的办公室职员一样处理多个任务 图形处理器 GPU # 图形处理器是计算机里的另一个部件。和 CPU 不同的是，GPU 更擅长在多核之间处理一些简单的任务。顾名思义，GPU 最初是被开发成处理图形任务的模块，这也是为什么在很多图形计算的背景下，会把“使用 GPU”或“支持 GPU”和快速渲染、流畅的交互体验相关联在一起。近些年来，有了 GPU 加速的计算能力，也使 GPU 独立承载越来越多的计算成为可能。
-图2：多个带着扳手🔧️的 GPU 内核，表明它们只能处理有限的任务 当你在手机或电脑上启动一个应用时，是 CPU 和 GPU 在给应用提供运行能力。通常情况下，操作系统提供了一套运行机制供应用程序在 CPU 和 GPU 运行。">
+  <meta property="og:description" content="一个通过翻译的方式学习英语的尝试计划">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2022-05-18T23:40:32+08:00">
     <meta property="article:modified_time" content="2022-05-18T23:40:32+08:00">
     <meta property="article:tag" content="翻译">
+    <meta property="article:tag" content="英语">
 
 
 
@@ -66,7 +60,7 @@
 
 
 
-<link rel="stylesheet" href="/assets/combined.min.04fb0b353b0d1d2950e7fec6d105b7e72b3ec97dd6e8d4e77c0aebdf0715425b.css" media="all">
+<link rel="stylesheet" href="/assets/combined.min.403fefeb55ad9a9e72af41abf4538457b584695b1fdcef661626b87d8b07dec9.css" media="all">
 
 
 
@@ -133,18 +127,20 @@
         <a href="/posts/inside-look-at-modern-web-browser-1/">深入了解现代网络浏览器（1/4）【译】</a></div>
 
 
-<div >
+<div  class="autonumber" >
   <article>
     <header class="single-intro-container">
         
         <h1 class="single-title">深入了解现代网络浏览器（1/4）【译】</h1>
+        <p class="single-summary">一个通过翻译的方式学习英语的尝试计划</p>
         
         <div class="single-subsummary">
           
           <div>
             
             <p class="single-date">
-              <time datetime="2022-05-18T23:40:32&#43;08:00">May 18, 2022</time>
+              <time datetime="2022-05-18T23:40:32&#43;08:00">2022-05-18</time>
+              &nbsp; · &nbsp;2 min read
             </p>
           </div>
         </div>
@@ -574,25 +570,6 @@
 
     </div>
   </article>
-    <div class="single-comments">
-      <script src="https://giscus.app/client.js"
-        data-repo="https://github.com/flyingmylo/mylofi.github.io.git"
-        data-repo-id="repoId"
-        data-category=""
-        data-category-id="categoryId"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="top"
-        data-theme="preferred_color_scheme"
-        data-lang="en"
-        data-loading="lazy"
-        crossorigin="anonymous"
-        async>
-</script>
-
-    </div>
 
   
 
@@ -611,8 +588,8 @@
             <div class="single-pagination-container-prev">
                 <div class="single-pagination-text">←</div>
                 <div class="single-pagination-text">
-                    <a href="/posts/git-command/">
-                        Git 常用命令
+                    <a href="/posts/common-people/">
+                        普通的人
                     </a>
                 </div>
             </div>
