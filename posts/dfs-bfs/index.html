@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html lang="zh-CN"
   dir="ltr">
 
@@ -153,6 +154,129 @@ const obj = { a: 1, b: 2, c: { d: 4, e: 5} } function dfs(obj, keys = []) { Obje
       <aside class="toc">
         <p><strong>Table of contents</strong></p>
         <nav id="TableOfContents">
+=======
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>算法之深度优先搜索与广度优先搜索 - Mylo</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="算法之深度优先搜索与广度优先搜索" />
+<meta property="og:description" content="深度优先搜索 DFS 深度优先搜索（Depth-First-Search）和广度优先搜索（Breadth-First-Search）都是一种用来遍历或者搜索树或图这种数据结构的算法。以树为例，深度优先搜索的过程会从根节点出发，尽可能深地遍历每个子节点，而且每个节点只能访问一次，是一个不断回溯的过程。
+实现方法大致如下：
+ 首先将根节点放入栈中 从栈中取出第一个节点，并检验它是否为目标  如果找到目标，则结束搜索并返回结果 否则将它某一个尚未检验过的直接子节点放入栈中   重复步骤 2 如果不存在未检测过的直接子节点  将上一级节点放入栈中 重复步骤 2   重复步骤 4 若栈为空，表示整张图都已检查过并且没有要查找的目标，结束搜索  另外需要我们了解的一种数据结构：栈。
+我们可以把盏比喻成一包手帕纸，每张纸巾都是按序一张一张放进去的，使用的时候是一张一张从最上边开始拿出来的。所以栈是一种后进先出（Last In First Out, LIFO）的数据结构。
+示例：通过 DFS 实现复制对象的复制
+const copyDFS = function(obj) { if (obj === null || typeof obj !== &#34;object&#34;) { return obj; } const copyObj = Array.isArray(obj) ? [] : {}; for (const key in obj) { copyObj[key] = copyDFS(obj[key]); } return copyObj; } 示例：获取对象的所有键" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://flyingmylo.com/posts/dfs-bfs/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-07-07T21:27:33+08:00" />
+<meta property="article:modified_time" content="2022-07-07T21:27:33+08:00" /><meta property="og:site_name" content="My cool site" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="算法之深度优先搜索与广度优先搜索"/>
+<meta name="twitter:description" content="深度优先搜索 DFS 深度优先搜索（Depth-First-Search）和广度优先搜索（Breadth-First-Search）都是一种用来遍历或者搜索树或图这种数据结构的算法。以树为例，深度优先搜索的过程会从根节点出发，尽可能深地遍历每个子节点，而且每个节点只能访问一次，是一个不断回溯的过程。
+实现方法大致如下：
+ 首先将根节点放入栈中 从栈中取出第一个节点，并检验它是否为目标  如果找到目标，则结束搜索并返回结果 否则将它某一个尚未检验过的直接子节点放入栈中   重复步骤 2 如果不存在未检测过的直接子节点  将上一级节点放入栈中 重复步骤 2   重复步骤 4 若栈为空，表示整张图都已检查过并且没有要查找的目标，结束搜索  另外需要我们了解的一种数据结构：栈。
+我们可以把盏比喻成一包手帕纸，每张纸巾都是按序一张一张放进去的，使用的时候是一张一张从最上边开始拿出来的。所以栈是一种后进先出（Last In First Out, LIFO）的数据结构。
+示例：通过 DFS 实现复制对象的复制
+const copyDFS = function(obj) { if (obj === null || typeof obj !== &#34;object&#34;) { return obj; } const copyObj = Array.isArray(obj) ? [] : {}; for (const key in obj) { copyObj[key] = copyDFS(obj[key]); } return copyObj; } 示例：获取对象的所有键"/>
+<meta name="application-name" content="Mylo&#39;s Blog">
+<meta name="apple-mobile-web-app-title" content="Mylo&#39;s Blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://flyingmylo.com/posts/dfs-bfs/" /><link rel="prev" href="http://flyingmylo.com/posts/inside-look-at-modern-web-browser-2/" /><link rel="next" href="http://flyingmylo.com/posts/interview/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "算法之深度优先搜索与广度优先搜索",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/flyingmylo.com\/posts\/dfs-bfs\/"
+        },"genre": "posts","keywords": "算法","wordcount":  248 ,
+        "url": "http:\/\/flyingmylo.com\/posts\/dfs-bfs\/","datePublished": "2022-07-07T21:27:33+08:00","dateModified": "2022-07-07T21:27:33+08:00","publisher": {
+            "@type": "Organization",
+            "name": "Mylo"},"author": {
+                "@type": "Person",
+                "name": "Mylo"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Mylo">Mylo</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Mylo">Mylo</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">算法之深度优先搜索与广度优先搜索</h1><div class="post-meta">
+            <div class="post-meta-line"></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-07-07">2022-07-07</time>&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+>>>>>>> 70fc96867e523bbae0b684b0084ffcf7670583c3
   <ul>
     <li>
       <ul>
@@ -161,6 +285,7 @@ const obj = { a: 1, b: 2, c: { d: 4, e: 5} } function dfs(obj, keys = []) { Obje
       </ul>
     </li>
   </ul>
+<<<<<<< HEAD
 </nav>
       </aside>
     
@@ -169,6 +294,10 @@ const obj = { a: 1, b: 2, c: { d: 4, e: 5} } function dfs(obj, keys = []) { Obje
   深度优先搜索 DFS
   <a class="anchor" href="#%e6%b7%b1%e5%ba%a6%e4%bc%98%e5%85%88%e6%90%9c%e7%b4%a2-dfs">#</a>
 </h3>
+=======
+</nav></div>
+            </div><div class="content" id="content"><h3 id="深度优先搜索-dfs">深度优先搜索 DFS</h3>
+>>>>>>> 70fc96867e523bbae0b684b0084ffcf7670583c3
 <p>深度优先搜索（Depth-First-Search）和广度优先搜索（Breadth-First-Search）都是一种用来遍历或者搜索树或图这种数据结构的算法。以树为例，深度优先搜索的过程会从根节点出发，尽可能深地遍历每个子节点，而且每个节点只能访问一次，是一个不断回溯的过程。</p>
 <p>实现方法大致如下：</p>
 <ol>
@@ -191,6 +320,7 @@ const obj = { a: 1, b: 2, c: { d: 4, e: 5} } function dfs(obj, keys = []) { Obje
 </ol>
 <p>另外需要我们了解的一种数据结构：栈。</p>
 <p>我们可以把盏比喻成一包手帕纸，每张纸巾都是按序一张一张放进去的，使用的时候是一张一张从最上边开始拿出来的。所以栈是一种后进先出（Last In First Out, LIFO）的数据结构。</p>
+<<<<<<< HEAD
 <p>
 
 
@@ -241,11 +371,48 @@ const obj = { a: 1, b: 2, c: { d: 4, e: 5} } function dfs(obj, keys = []) { Obje
   广度优先搜索 BFS
   <a class="anchor" href="#%e5%b9%bf%e5%ba%a6%e4%bc%98%e5%85%88%e6%90%9c%e7%b4%a2-bfs">#</a>
 </h3>
+=======
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/dfs-bfs/dfs.png?width=50%22%e6%b7%b1%e5%ba%a6%e4%bc%98%e5%85%88%e6%90%9c%e7%b4%a2%22"
+        data-srcset="/images/dfs-bfs/dfs.png?width=50%22%e6%b7%b1%e5%ba%a6%e4%bc%98%e5%85%88%e6%90%9c%e7%b4%a2%22, /images/dfs-bfs/dfs.png?width=50%22%e6%b7%b1%e5%ba%a6%e4%bc%98%e5%85%88%e6%90%9c%e7%b4%a2%22 1.5x, /images/dfs-bfs/dfs.png?width=50%22%e6%b7%b1%e5%ba%a6%e4%bc%98%e5%85%88%e6%90%9c%e7%b4%a2%22 2x"
+        data-sizes="auto"
+        alt="/images/dfs-bfs/dfs.png?width=50&#34;深度优先搜索&#34;"
+        title="/images/dfs-bfs/dfs.png?width=50&#34;深度优先搜索&#34;" /></p>
+<p>示例：通过 DFS 实现复制对象的复制</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kr">const</span> <span class="nx">copyDFS</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">obj</span> <span class="o">===</span> <span class="kc">null</span> <span class="o">||</span> <span class="k">typeof</span> <span class="nx">obj</span> <span class="o">!==</span> <span class="s2">&#34;object&#34;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">obj</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="kr">const</span> <span class="nx">copyObj</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="o">?</span> <span class="p">[]</span> <span class="o">:</span> <span class="p">{};</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kr">const</span> <span class="nx">key</span> <span class="k">in</span> <span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">copyObj</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">copyDFS</span><span class="p">(</span><span class="nx">obj</span><span class="p">[</span><span class="nx">key</span><span class="p">]);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">copyObj</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div><p>示例：获取对象的所有键</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kr">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">a</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">c</span><span class="o">:</span> <span class="p">{</span> <span class="nx">d</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span> <span class="nx">e</span><span class="o">:</span> <span class="mi">5</span><span class="p">}</span> <span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">dfs</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="nx">keys</span> <span class="o">=</span> <span class="p">[])</span> <span class="p">{</span>
+  <span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">obj</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(([</span><span class="nx">k</span><span class="p">,</span> <span class="nx">v</span><span class="p">])</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">keys</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">k</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">v</span> <span class="o">===</span> <span class="s1">&#39;object&#39;</span><span class="p">)</span> <span class="nx">dfs</span><span class="p">(</span><span class="nx">v</span><span class="p">,</span> <span class="nx">keys</span><span class="p">)</span>
+    <span class="k">else</span> <span class="k">return</span>
+  <span class="p">})</span>
+
+  <span class="k">return</span> <span class="nx">keys</span>
+<span class="p">}</span>
+<span class="c1">// [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;, &#39;f&#39;]
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">dfs</span><span class="p">(</span><span class="nx">obj</span><span class="p">))</span>
+</code></pre></div><h3 id="广度优先搜索-bfs">广度优先搜索 BFS</h3>
+>>>>>>> 70fc96867e523bbae0b684b0084ffcf7670583c3
 <p>广度优先搜索（Breadth-First-Search）也会沿着树的宽度进行遍历，通常用来解决两种问题：</p>
 <ul>
 <li>从节点 A 出发，有前往节点 B 的路径吗？</li>
 <li>从节点 A 出发，前往节点 B 的哪条路径最短？</li>
 </ul>
+<<<<<<< HEAD
 <p>
 
 
@@ -267,6 +434,16 @@ const obj = { a: 1, b: 2, c: { d: 4, e: 5} } function dfs(obj, keys = []) { Obje
     
 </figure>
 </p>
+=======
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/dfs-bfs/bfs.png?width=50%22%e5%b9%bf%e5%ba%a6%e4%bc%98%e5%85%88%e6%90%9c%e7%b4%a2%22"
+        data-srcset="/images/dfs-bfs/bfs.png?width=50%22%e5%b9%bf%e5%ba%a6%e4%bc%98%e5%85%88%e6%90%9c%e7%b4%a2%22, /images/dfs-bfs/bfs.png?width=50%22%e5%b9%bf%e5%ba%a6%e4%bc%98%e5%85%88%e6%90%9c%e7%b4%a2%22 1.5x, /images/dfs-bfs/bfs.png?width=50%22%e5%b9%bf%e5%ba%a6%e4%bc%98%e5%85%88%e6%90%9c%e7%b4%a2%22 2x"
+        data-sizes="auto"
+        alt="/images/dfs-bfs/bfs.png?width=50&#34;广度优先搜索&#34;"
+        title="/images/dfs-bfs/bfs.png?width=50&#34;广度优先搜索&#34;" /></p>
+>>>>>>> 70fc96867e523bbae0b684b0084ffcf7670583c3
 <p>举个例子，假如今天的你心血来潮突然想看《假面骑士》，当你打开腾讯视频的时候发现只有会员才能看，真扫兴（胜利的法则变得不太确定）。这时你又不想自费充会员，所以就想找朋友借个用用。于是去挨个去问你的朋友，如果你的朋友里都没有会员，那就必须要找你朋友的朋友，别忘了你的目标是找来一个会员账号。首先，将你的朋友列入一个名单中依次查找，如果你的朋友李白没有会员，其次再将李白的朋友也加入到名单中，所以为了这个目标，你需要在你的朋友、朋友的朋友中查找，这种方式会搜遍你的整个人际关系网络，直到借来一个会员账号（胜利的法则已经决定✌️）或者一个会员都没有为止，这个过程就是广度优先搜索算法。</p>
 <p>回到刚才的两个问题：</p>
 <ul>
@@ -291,6 +468,7 @@ const obj = { a: 1, b: 2, c: { d: 4, e: 5} } function dfs(obj, keys = []) { Obje
 <li>重复步骤 2</li>
 </ol>
 <p>示例：通过 DFS 实现对象深拷贝：</p>
+<<<<<<< HEAD
 <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="font-weight:bold;font-style:italic;text-decoration:underline">function</span> deepCopy(obj) {
 </span></span><span style="display:flex;"><span>  <span style="font-weight:bold;text-decoration:underline">const</span> queue = [obj]
 </span></span><span style="display:flex;"><span>  <span style="font-weight:bold;text-decoration:underline">const</span> newObject = {}
@@ -449,4 +627,73 @@ const obj = { a: 1, b: 2, c: { d: 4, e: 5} } function dfs(obj, keys = []) { Obje
 
 <script src="/js/theme-switch.js"></script>
 <script defer src="/js/copy-code.js"></script>
+=======
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">deepCopy</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">queue</span> <span class="o">=</span> <span class="p">[</span><span class="nx">obj</span><span class="p">]</span>
+  <span class="kr">const</span> <span class="nx">newObject</span> <span class="o">=</span> <span class="p">{}</span>
+
+  <span class="k">while</span> <span class="p">(</span><span class="nx">queue</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">currentObj</span> <span class="o">=</span> <span class="nx">queue</span><span class="p">.</span><span class="nx">shift</span><span class="p">()</span>
+
+    <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">currentObj</span><span class="p">).</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">key</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="kr">const</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">currentObj</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span>
+
+      <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">value</span> <span class="o">===</span> <span class="s1">&#39;object&#39;</span> <span class="o">&amp;&amp;</span> <span class="nx">value</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">queue</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span>
+        <span class="nx">newObject</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">?</span> <span class="p">[]</span> <span class="o">:</span> <span class="p">{}</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">newObject</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">value</span>
+      <span class="p">}</span>
+    <span class="p">})</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="nx">newObject</span>
+<span class="p">}</span>
+
+<span class="kr">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">a</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span> <span class="mi">2</span> <span class="p">}</span>
+<span class="kr">const</span> <span class="nx">copy</span> <span class="o">=</span> <span class="nx">deepCopy</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>
+<span class="nx">copy</span><span class="p">.</span><span class="nx">a</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">copy</span><span class="p">)</span> <span class="c1">// {a: 3, b: 2}
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">copy</span> <span class="o">===</span> <span class="nx">obj</span><span class="p">)</span> <span class="c1">// false
+</span><span class="c1"></span>
+</code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2022-07-07</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E7%AE%97%E6%B3%95/">算法</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/inside-look-at-modern-web-browser-2/" class="prev" rel="prev" title="深入了解现代网络浏览器（2/4）【译】"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>深入了解现代网络浏览器（2/4）【译】</a>
+            <a href="/posts/interview/" class="next" rel="next" title="面经记录">面经记录<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="utterances" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.91.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Mylo</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.1/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"Comment","lightTheme":"github-light","repo":"https://github.com/flyingmylo/flyingmylo.github.io.git"}},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+>>>>>>> 70fc96867e523bbae0b684b0084ffcf7670583c3
 </html>

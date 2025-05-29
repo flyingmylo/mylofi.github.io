@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html lang="zh-CN"
   dir="ltr">
 
@@ -150,6 +151,135 @@
   vue 相关
   <a class="anchor" href="#vue-%e7%9b%b8%e5%85%b3">#</a>
 </h3>
+=======
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>面经记录 - Mylo</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="面经记录" />
+<meta property="og:description" content="vue 相关  mixin 相关场景以及利弊，拥有多个属性时的执行顺序， v-model 原理，在下拉选择器组件中是怎么实现的 filter 怎么实现，使用场景 插槽的实现原理，如何传值 v-for 中 key 的作用，延伸到 diff 实现，不同位置的比较 vnode 概念 v-if 控制 dom 显隐时， vdom 是如何处理的 watch 监听是的 deep: true 实现原理 nextTick 原理 computed 和 watch 的区别 Vue.use 和 Vue.install Vue 中手动 extend data 中的属性是定义在 MVVM 中的哪个环节  css 相关  回流和重绘的概念，绝对定位是否会导致回流 flex: 1 的分别代表什么属性以及作用 伪元素和伪类的区别，分别有哪些 visibility: hidden 和 opacity 是否触发点击事件  js 相关  let/const/var 区别，用 const 声明对象时，是否可以改变对象的属性值，为什么 深度优先搜索和广度优先搜索 如何证明 js 对象里存在循环引用 类型判断的方法，typeof 对象的类属性 实例对象是否是 Function ，instanceof Function 结果 promise 执行顺序，事件循环 es5 模拟 class 的实现 localStorage 如何实现过期时间 手机号正则  工程化相关  介绍 webpack 常用的配置以及功能 webpack 多页面有多个入口时如何配置 source-map 分类，如何配置和调试 webpack 中怎么隔离 css 性能优化方案，代码/打包/资源加载方面 热更新原理  概念类问题  http/https 区别 介绍 options 请求的意义 MVVM/MVC 的区别，如何实现一个 MVVM 简述 XSS 和 CSRF 的概念，并列举几种安全防范策略  编程题  编写一个函数，大小写字母取反  const fn = (string) =&gt; { let ans = &#39;&#39; for (let v of string) { ans &#43;= v." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://flyingmylo.com/posts/interview/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-07-13T21:27:03+08:00" />
+<meta property="article:modified_time" content="2022-07-13T21:27:03+08:00" /><meta property="og:site_name" content="My cool site" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="面经记录"/>
+<meta name="twitter:description" content="vue 相关  mixin 相关场景以及利弊，拥有多个属性时的执行顺序， v-model 原理，在下拉选择器组件中是怎么实现的 filter 怎么实现，使用场景 插槽的实现原理，如何传值 v-for 中 key 的作用，延伸到 diff 实现，不同位置的比较 vnode 概念 v-if 控制 dom 显隐时， vdom 是如何处理的 watch 监听是的 deep: true 实现原理 nextTick 原理 computed 和 watch 的区别 Vue.use 和 Vue.install Vue 中手动 extend data 中的属性是定义在 MVVM 中的哪个环节  css 相关  回流和重绘的概念，绝对定位是否会导致回流 flex: 1 的分别代表什么属性以及作用 伪元素和伪类的区别，分别有哪些 visibility: hidden 和 opacity 是否触发点击事件  js 相关  let/const/var 区别，用 const 声明对象时，是否可以改变对象的属性值，为什么 深度优先搜索和广度优先搜索 如何证明 js 对象里存在循环引用 类型判断的方法，typeof 对象的类属性 实例对象是否是 Function ，instanceof Function 结果 promise 执行顺序，事件循环 es5 模拟 class 的实现 localStorage 如何实现过期时间 手机号正则  工程化相关  介绍 webpack 常用的配置以及功能 webpack 多页面有多个入口时如何配置 source-map 分类，如何配置和调试 webpack 中怎么隔离 css 性能优化方案，代码/打包/资源加载方面 热更新原理  概念类问题  http/https 区别 介绍 options 请求的意义 MVVM/MVC 的区别，如何实现一个 MVVM 简述 XSS 和 CSRF 的概念，并列举几种安全防范策略  编程题  编写一个函数，大小写字母取反  const fn = (string) =&gt; { let ans = &#39;&#39; for (let v of string) { ans &#43;= v."/>
+<meta name="application-name" content="Mylo&#39;s Blog">
+<meta name="apple-mobile-web-app-title" content="Mylo&#39;s Blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://flyingmylo.com/posts/interview/" /><link rel="prev" href="http://flyingmylo.com/posts/dfs-bfs/" /><link rel="next" href="http://flyingmylo.com/posts/git-slim/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "面经记录",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/flyingmylo.com\/posts\/interview\/"
+        },"genre": "posts","keywords": "notes","wordcount":  174 ,
+        "url": "http:\/\/flyingmylo.com\/posts\/interview\/","datePublished": "2022-07-13T21:27:03+08:00","dateModified": "2022-07-13T21:27:03+08:00","publisher": {
+            "@type": "Organization",
+            "name": "Mylo"},"author": {
+                "@type": "Person",
+                "name": "Mylo"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Mylo">Mylo</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Mylo">Mylo</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">面经记录</h1><div class="post-meta">
+            <div class="post-meta-line"></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-07-13">2022-07-13</time>&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#vue-相关">vue 相关</a></li>
+        <li><a href="#css-相关">css 相关</a></li>
+        <li><a href="#js-相关">js 相关</a></li>
+        <li><a href="#工程化相关">工程化相关</a></li>
+        <li><a href="#概念类问题">概念类问题</a></li>
+        <li><a href="#编程题">编程题</a></li>
+        <li><a href="#场景题">场景题</a></li>
+        <li><a href="#发散性问题">发散性问题</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h3 id="vue-相关">vue 相关</h3>
+>>>>>>> 70fc96867e523bbae0b684b0084ffcf7670583c3
 <ul>
 <li><code>mixin</code> 相关场景以及利弊，拥有多个属性时的执行顺序，</li>
 <li><code>v-model</code> 原理，在下拉选择器组件中是怎么实现的</li>
@@ -165,20 +295,28 @@
 <li><code>Vue</code> 中手动 <code>extend</code></li>
 <li><code>data</code> 中的属性是定义在 <code>MVVM</code> 中的哪个环节</li>
 </ul>
+<<<<<<< HEAD
 <h3 class="heading" id="css-相关">
   css 相关
   <a class="anchor" href="#css-%e7%9b%b8%e5%85%b3">#</a>
 </h3>
+=======
+<h3 id="css-相关">css 相关</h3>
+>>>>>>> 70fc96867e523bbae0b684b0084ffcf7670583c3
 <ul>
 <li>回流和重绘的概念，绝对定位是否会导致回流</li>
 <li><code>flex: 1</code> 的分别代表什么属性以及作用</li>
 <li>伪元素和伪类的区别，分别有哪些</li>
 <li><code>visibility: hidden</code> 和 <code>opacity</code> 是否触发点击事件</li>
 </ul>
+<<<<<<< HEAD
 <h3 class="heading" id="js-相关">
   js 相关
   <a class="anchor" href="#js-%e7%9b%b8%e5%85%b3">#</a>
 </h3>
+=======
+<h3 id="js-相关">js 相关</h3>
+>>>>>>> 70fc96867e523bbae0b684b0084ffcf7670583c3
 <ul>
 <li><code>let/const/var</code> 区别，用 <code>const</code> 声明对象时，是否可以改变对象的属性值，为什么</li>
 <li>深度优先搜索和广度优先搜索</li>
@@ -190,10 +328,14 @@
 <li><code>localStorage</code> 如何实现过期时间</li>
 <li>手机号正则</li>
 </ul>
+<<<<<<< HEAD
 <h3 class="heading" id="工程化相关">
   工程化相关
   <a class="anchor" href="#%e5%b7%a5%e7%a8%8b%e5%8c%96%e7%9b%b8%e5%85%b3">#</a>
 </h3>
+=======
+<h3 id="工程化相关">工程化相关</h3>
+>>>>>>> 70fc96867e523bbae0b684b0084ffcf7670583c3
 <ul>
 <li>介绍 <code>webpack</code> 常用的配置以及功能</li>
 <li><code>webpack</code> 多页面有多个入口时如何配置</li>
@@ -202,16 +344,21 @@
 <li>性能优化方案，代码/打包/资源加载方面</li>
 <li>热更新原理</li>
 </ul>
+<<<<<<< HEAD
 <h3 class="heading" id="概念类问题">
   概念类问题
   <a class="anchor" href="#%e6%a6%82%e5%bf%b5%e7%b1%bb%e9%97%ae%e9%a2%98">#</a>
 </h3>
+=======
+<h3 id="概念类问题">概念类问题</h3>
+>>>>>>> 70fc96867e523bbae0b684b0084ffcf7670583c3
 <ul>
 <li><code>http/https</code> 区别</li>
 <li>介绍 <code>options</code> 请求的意义</li>
 <li><code>MVVM/MVC</code> 的区别，如何实现一个 <code>MVVM</code></li>
 <li>简述 <code>XSS</code> 和 <code>CSRF</code> 的概念，并列举几种安全防范策略</li>
 </ul>
+<<<<<<< HEAD
 <h3 class="heading" id="编程题">
   编程题
   <a class="anchor" href="#%e7%bc%96%e7%a8%8b%e9%a2%98">#</a>
@@ -234,6 +381,24 @@
   场景题
   <a class="anchor" href="#%e5%9c%ba%e6%99%af%e9%a2%98">#</a>
 </h3>
+=======
+<h3 id="编程题">编程题</h3>
+<ul>
+<li>编写一个函数，大小写字母取反</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kr">const</span> <span class="nx">fn</span> <span class="o">=</span> <span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">ans</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">v</span> <span class="k">of</span> <span class="nx">string</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">ans</span> <span class="o">+=</span> <span class="nx">v</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span> <span class="o">===</span> <span class="nx">v</span> <span class="o">?</span> <span class="nx">v</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">()</span> <span class="o">:</span> <span class="nx">v</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">ans</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li>编写一个函数，输入 <code>int</code> 型，返回整数逆序后的字符串</li>
+<li>二维数组扁平化，返回一个去重且是升序的一维数组</li>
+</ul>
+<h3 id="场景题">场景题</h3>
+>>>>>>> 70fc96867e523bbae0b684b0084ffcf7670583c3
 <ul>
 <li>数据多、加载慢的解决方式
 <ul>
@@ -264,14 +429,19 @@
 </li>
 <li>同一个浏览器，不同标签之间数据传递的方法，简单列举</li>
 </ul>
+<<<<<<< HEAD
 <h3 class="heading" id="发散性问题">
   发散性问题
   <a class="anchor" href="#%e5%8f%91%e6%95%a3%e6%80%a7%e9%97%ae%e9%a2%98">#</a>
 </h3>
+=======
+<h3 id="发散性问题">发散性问题</h3>
+>>>>>>> 70fc96867e523bbae0b684b0084ffcf7670583c3
 <ul>
 <li>职业规划</li>
 <li>怎么制定技术方案，从哪几个方面考虑</li>
 </ul>
+<<<<<<< HEAD
 
     </div>
   </article>
@@ -403,4 +573,45 @@
 
 <script src="/js/theme-switch.js"></script>
 <script defer src="/js/copy-code.js"></script>
+=======
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2022-07-13</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/notes/">notes</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/dfs-bfs/" class="prev" rel="prev" title="算法之深度优先搜索与广度优先搜索"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>算法之深度优先搜索与广度优先搜索</a>
+            <a href="/posts/git-slim/" class="next" rel="next" title="清理 Git 文件夹过期引用">清理 Git 文件夹过期引用<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="utterances" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.91.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Mylo</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.1/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"Comment","lightTheme":"github-light","repo":"https://github.com/flyingmylo/flyingmylo.github.io.git"}},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+>>>>>>> 70fc96867e523bbae0b684b0084ffcf7670583c3
 </html>
