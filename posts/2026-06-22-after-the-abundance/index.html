@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+  dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+<link rel="icon" type="image/ico" href="http://mylofi.fun/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://mylofi.fun/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://mylofi.fun/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="http://mylofi.fun/android-chrome-192x192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="http://mylofi.fun/apple-touch-icon.png">
+
+<meta name="description" content=""/>
+
+
+
+<title>
+    
+    丰饶之后：腾讯这份报告，让我陷入了深思 | 
+    
+</title>
+
+<link rel="canonical" href="http://mylofi.fun/posts/2026-06-22-after-the-abundance/"/>
+
+<meta property="og:url" content="http://mylofi.fun/posts/2026-06-22-after-the-abundance/">
+  <meta property="og:title" content="丰饶之后：腾讯这份报告，让我陷入了深思">
+  <meta property="og:description" content="代码白菜价了，瓶颈从&#34;写&#34;搬到规格、验证、品味，还有能不能兜得住。丰饶之后，稀缺没消失，它搬家了。">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-06-22T16:16:33+08:00">
+    <meta property="article:modified_time" content="2026-06-22T16:16:33+08:00">
+    <meta property="og:image" content="http://mylofi.fun/posts/2026-06-22-after-the-abundance/00-cover-fengrao-zhihou.png">
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/assets/combined.min.403fefeb55ad9a9e72af41abf4538457b584695b1fdcef661626b87d8b07dec9.css" media="all">
+
+
+
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-xxxxxxxxx"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-xxxxxxxxx');
+        }
+      </script>
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+</head>
+
+
+
+
+
+
+
+<body class="auto">
+
+  <div class="content">
+    <header>
+      
+
+<div class="header">
+
+    
+
+</div>
+
+    </header>
+
+    <main class="main">
+      
+
+
+
+
+<div class="breadcrumbs"><a href="/">Home</a><span class="breadcrumbs-separator">/</span><a href="/posts/">Posts</a><span class="breadcrumbs-separator">/</span>
+        <a href="/posts/2026-06-22-after-the-abundance/">丰饶之后：腾讯这份报告，让我陷入了深思</a></div>
+
+
+<div >
+  <article>
+    <header class="single-intro-container">
+        
+        <h1 class="single-title">丰饶之后：腾讯这份报告，让我陷入了深思</h1>
+        <p class="single-summary">代码白菜价了，瓶颈从&quot;写&quot;搬到规格、验证、品味，还有能不能兜得住。丰饶之后，稀缺没消失，它搬家了。</p>
+        
+        <div class="single-subsummary">
+          
+          <div>
+            
+            <p class="single-date">
+              <time datetime="2026-06-22T16:16:33&#43;08:00">2026-06-22</time>
+              &nbsp; · &nbsp;2 min read
+            </p>
+          </div>
+        </div>
+        
+    </header>
+    
+    <div class="single-content">
+      <h1 class="heading" id="丰饶之后腾讯这份报告让我陷入了深思">
+  丰饶之后：腾讯这份报告，让我陷入了深思
+  <a class="anchor" href="#%e4%b8%b0%e9%a5%b6%e4%b9%8b%e5%90%8e%e8%85%be%e8%ae%af%e8%bf%99%e4%bb%bd%e6%8a%a5%e5%91%8a%e8%ae%a9%e6%88%91%e9%99%b7%e5%85%a5%e4%ba%86%e6%b7%b1%e6%80%9d">#</a>
+</h1>
+<p>读了腾讯研究院那份《AI Coding 观察报告 2.0》，总共四十多页，花了快一个小时才看完，在这唠几句自己的想法。</p>
+<p>不是要做书摘，是里面有几件事，看完之后一直在脑子里转，不吐不快，也正好用这篇文章理清一下思路。</p>
+<hr>
+<h2 class="heading" id="先说最让我难顶的是什么">
+  先说最让我难顶的是什么
+  <a class="anchor" href="#%e5%85%88%e8%af%b4%e6%9c%80%e8%ae%a9%e6%88%91%e9%9a%be%e9%a1%b6%e7%9a%84%e6%98%af%e4%bb%80%e4%b9%88">#</a>
+</h2>
+<p>Anthropic 在 2026 年 4 月，9 天之内发了两个模型。</p>
+<p>一个叫 Mythos Preview，代码测试跑到 93.9%。但不对外，只给 11 家“防御性安全伙伴”用。</p>
+<p>9 天后，Opus 4.7 公开发布，87.6%。</p>
+<p>差了 6 个点。这 6 个点哪儿来的？官方博文里有一句，原话大意是：Opus 4.7 是他们“第一个这类模型”，训练的时候，<strong>故意把某些能力削弱了</strong>，才放出来。</p>
+<p>你品，你细品，看看这话说的。</p>
+<p>意思是，他们手里有个更强的，强到你够不着。你能买到的那个，是被“降权”之后的版本。而且他们明着告诉你这事。</p>
+<p>这跟以前“实验室藏着好东西”不一样。以前是藏着掖着，现在是<strong>公开发布机制本身就是分层的</strong>。他们甚至给这套玩法起了个名字，叫“双轨发布”。内部一条轨一直突破，外部一条轨挑挑拣拣、降了权、再喂给你。</p>
+<p>报告管这叫“商业模型在台面趋同，储备能力在台面下分化”。六大商业模型的分数确实挤在 1 个百分点里，80% 出头，看着谁都能用。但那个 93.9% 的东西在那儿杵着，告诉你台面上的趋同是个假象。</p>
+<p>我觉得这是整份报告里最值得留意的一件事，比模型分数本身重要得多。</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+<figure class="">
+
+    <div class="img-container" style="--w: 1672; --h: 941;">
+        <img loading="lazy" alt="" src="/posts/2026-06-22-after-the-abundance/01-double-track-release.png" width="1672" height="941">
+    </div>
+
+    
+</figure>
+</p>
+<hr>
+<h2 class="heading" id="然后是那个-22-倍">
+  然后是那个 22 倍
+  <a class="anchor" href="#%e7%84%b6%e5%90%8e%e6%98%af%e9%82%a3%e4%b8%aa-22-%e5%80%8d">#</a>
+</h2>
+<p>既然模型都差不多了，竞争靠啥？</p>
+<p>报告说靠一个叫“驾驭工程”的东西。也就是最近很火的 Harness Engineering 这个概念，这个东西是在 2025 年底才被人正式起的名，2026 年初 OpenAI 发了篇同名博文，一下就火了。</p>
+<p>啥意思呢？就是你别再纠结用哪个模型了，该花心思的是——怎么给 AI Agent 搭一套让它靠谱干活的系统。规格怎么写，约束怎么卡，记忆怎么管，出了错怎么兜回来。</p>
+<p>有个数字，我得承认，看到的时候愣了一下。</p>
+<p>SWE-bench Pro 这个测试上，<strong>换一套驾驭框架带来的分数波动，是换一个模型的 22 倍。</strong></p>
+<p>22 倍。不是 22%。</p>
+<p>你拿着同一个模型，给它套不同的“驾驭框架”，分差能拉到 6 到 10 个百分点。反过来，你死磕“该用 Opus 还是 Gemini”，那个差距可能不到 1 个点。</p>
+<p>这事挺颠覆的。以前大家觉得模型是核武器，其他的不重要。现在模型都差不多，那个“其他的”反而成了真正的东西。</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+<figure class="">
+
+    <div class="img-container" style="--w: 1672; --h: 941;">
+        <img loading="lazy" alt="" src="/posts/2026-06-22-after-the-abundance/02-harness-engineering-v2.png" width="1672" height="941">
+    </div>
+
+    
+</figure>
+</p>
+<p>Anthropic 自己有个例子。他们早期 Sonnet 4.5 那会儿的框架，得把任务切成一个个短跑（sprint），跑一段重置一次上下文，因为模型上下文一长就“焦虑”，提前草草收尾。后来 Opus 4.5 能连续干 2 小时了，sprint 那套就拆了。</p>
+<p>再到 Opus 4.7，合作伙伴说它会<strong>在写代码之前先做形式化证明</strong>。</p>
+<p>先证明，再写。</p>
+<p>这事我没法不觉得有点渗人。一个机器，开始自己验证自己了。</p>
+<hr>
+<h2 class="heading" id="cli-这事我想了半天">
+  CLI 这事，我想了半天
+  <a class="anchor" href="#cli-%e8%bf%99%e4%ba%8b%e6%88%91%e6%83%b3%e4%ba%86%e5%8d%8a%e5%a4%a9">#</a>
+</h2>
+<p>报告里还有个判断，我反复读了几遍才反应过来。</p>
+<p>说现在这些工具——Cursor 3 、Codex App 、Google Antigravity——它们的“主要使用者”，正从人变成 Agent 组。</p>
+<p>不是「人也用 Agent 也用」。是主要使用者变了。人从敲代码的，变成调度好几个 Agent 的。</p>
+<p>然后有个反直觉的：Agent 要跟外部世界打交道，靠什么？</p>
+<p>命令行，CLI。</p>
+<p>不是什么花哨的协议，是那个最老的、黑底白字的命令行。</p>
+<p>有个对比我直接搬过来说：GitHub 的 MCP 服务器（一种 AI 工具调用协议），要往上下文里塞 <strong>5.5 万 tokens</strong>。用 <code>gh</code> 命令行，<strong>200 tokens</strong>。差 275 倍。可靠性，CLI 是 100%，MCP 是 72%。</p>
+<p>为什么？报告解释得挺到位。AI 模型训练的时候，吃进去的真实代码里全是 shell 命令和脚本。它写一行 <code>gh pr list</code>，跟写一行 Python，对它来说一回事。但你要让它走 MCP 协议，得先读懂协议描述、解析工具列表、格式化调用、再解析返回。每一步都是多套一层皮。</p>
+<p>说白了，对 Agent 来讲，命令行是母语，MCP 是外语。</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+<figure class="">
+
+    <div class="img-container" style="--w: 1672; --h: 941;">
+        <img loading="lazy" alt="" src="/posts/2026-06-22-after-the-abundance/03-cli-native-language-v4.png" width="1672" height="941">
+    </div>
+
+    
+</figure>
+</p>
+<p>所以行业好像在往一个分层上收敛。命令行管 Agent 自己干活这层（内循环），MCP 管跨系统协调那层（外循环），还有一个叫 Skills 的东西管标准流程，主要是给不会写代码的人用。</p>
+<p>顺嘴一提，国内这边出了个怪现象。一周之内，网易云、钉钉、飞书、企业微信，集体开放了 CLI。海外是开发者推着走，咱们是平台自己往下推。超级 App 主动 CLI 化。搞不好能直接跳过 IDE 这一步，在聊天软件里就把 Agent 用了。</p>
+<p>这块我其实没完全想明白后果。先记下。</p>
+<hr>
+<h2 class="heading" id="写代码不是瓶颈了那什么是瓶颈">
+  写代码不是瓶颈了，那什么是瓶颈？
+  <a class="anchor" href="#%e5%86%99%e4%bb%a3%e7%a0%81%e4%b8%8d%e6%98%af%e7%93%b6%e9%a2%88%e4%ba%86%e9%82%a3%e4%bb%80%e4%b9%88%e6%98%af%e7%93%b6%e9%a2%88">#</a>
+</h2>
+<p>报告有个核心论点，对应它那个标题“丰饶之后”。</p>
+<p>意思是这样：以前做软件，卡在“怎么实现”。现在 AI 把这一段吃得差不多了。但瓶颈没消失，它<strong>搬家了</strong>，搬到了两头。</p>
+<p>往前，卡在“规格定义”——你到底要 AI 干啥，这个说不清，它就瞎写。</p>
+<p>往后，卡在“验证维护”——AI 写出来的东西，对不对、安不安全、能不能维护。</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+<figure class="">
+
+    <div class="img-container" style="--w: 1672; --h: 941;">
+        <img loading="lazy" alt="" src="/posts/2026-06-22-after-the-abundance/04-scarcity-moved-v2.png" width="1672" height="941">
+    </div>
+
+    
+</figure>
+</p>
+<p>后面的数据不太好看。Veracode 发现 45% 的 AI 代码任务里掺了已知漏洞。GitClear 翻了 2.11 亿行代码，技术债务估摸涨了三到四成，重复代码翻 4 倍，重构掉了 60%。意思就是，代码生成白菜价了，但验证它、维护它的钱，一分没省。</p>
+<p>前面有个实验挺有意思。KTH（瑞典那个皇家理工）让 AI 从一篇 926 字的英文规格，把自己整个重新生成出来。成功了。</p>
+<p>这意味着啥？规格变成了那个“稳的东西”，代码反而退化成可再生的副产品。工程师的重心，从写代码挪到写规格了。已经有人这么干了，他们自己开玩笑说&quot;用英语编程，提交的是 Go&quot;。</p>
+<p>还有一道墙，得提一下。有个叫“原型墙”的说法。</p>
+<p>搞 vibe coding 的那帮人，老上演同一出戏。第一周，兴奋，AI 嗖地出个雏形，一个月 20 美元，看着像成了七成。第三周，慌，安全问题、各种边角情况往外冒。第二个月，放弃，维护成本飙到一个月 200，烂尾。</p>
+<p>有个 Google 的工程师管这叫“70% 问题”：AI 写的代码看着 70% 对，可补完剩下 30%，比从头写还费劲。</p>
+<p>那“新的稀缺”是什么？报告点得很直白。分发，运维，合规，还有品味，代码不稀罕了，品味稀罕了。</p>
+<hr>
+<h2 class="heading" id="saas-那段我倒没那么悲观">
+  SaaS 那段，我倒没那么悲观
+  <a class="anchor" href="#saas-%e9%82%a3%e6%ae%b5%e6%88%91%e5%80%92%e6%b2%a1%e9%82%a3%e4%b9%88%e6%82%b2%e8%a7%82">#</a>
+</h2>
+<p>过去三个月市场上有个条件反射。Anthropic 一发东西，就有个软件公司股价挨刀。</p>
+<p>2 月 5 号，Anthropic 发了 Cowork 和 Opus 4.6，FactSet 当天跌 10%。2 月 23 号，就发了篇关于 COBOL 现代化的博客，IBM 跌了 13.2%，是它 25 年最大的单日跌幅。就一篇博客。4 月 17 号 Claude Design 发布，Figma 跌了快 7 个点。</p>
+<p>媒体管这叫“SaaS 末日”。</p>
+<p>但报告有个更冷静的说法，我比较认同：SaaS 没死，是<strong>中间那一层</strong>在被吃掉。</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+<figure class="">
+
+    <div class="img-container" style="--w: 1672; --h: 941;">
+        <img loading="lazy" alt="" src="/posts/2026-06-22-after-the-abundance/05-saas-middle-layer.png" width="1672" height="941">
+    </div>
+
+    
+</figure>
+</p>
+<p>你看看挨刀的都是谁。设计工具、金融数据、老系统改造、单一工作流协同。共同点：把一个 API，包一层带收费界面的应用，就干这个。</p>
+<p>与此同时两头在长。一头是大平台，Cursor 估值从 293 亿蹿到 500 亿，Anthropic 拿走企业 AI 开销的 37%。另一头是 Skills 这种，让不懂代码的人用 markdown 就能把自己的工作流固化成可复用的东西，直接绕开中间商。</p>
+<p>有个预测是挺狠的：按座位收费这套，2028 年前得作废。以后按产出收。Salesforce 按对话次数收，Intercom 按解决了多少工单收。Anthropic 在试点按&quot;省了多少工时&quot;折算。</p>
+<p>这个变化我觉得比单点股价那些事深。但 SaaS 要说全完蛋，我是不信的。复杂的工资、社保、跨国合规那摊事，再多的 vibe coding 也复制不了，被吃的只是那层“套壳”。</p>
+<hr>
+<h2 class="heading" id="最后这条跟每个人都有关">
+  最后这条，跟每个人都有关
+  <a class="anchor" href="#%e6%9c%80%e5%90%8e%e8%bf%99%e6%9d%a1%e8%b7%9f%e6%af%8f%e4%b8%aa%e4%ba%ba%e9%83%bd%e6%9c%89%e5%85%b3">#</a>
+</h2>
+<p>报告里最实在的一句，是 Anthropic 的 CEO 在达沃斯说的：以后工程师是编辑 Claude 的产出，不是自己写代码。</p>
+<p>Replit 那个 CEO 有个分法，说是搞技术的往三个方向走：往下，系统编程、嵌入式、安全关键，越靠底层越难被替；留在中间，全栈、增删改查那些，最危险，因为这是 AI 最拿手的；往上，产品设计、用户体验、商业策略，越靠用户越得靠人。</p>
+<p>数据已经出来了。软件开发岗位需求只剩 2020 年的 65%。初级岗从 30% 掉到 20%，高级岗快到 40%。跟驾驭工程相关的岗，LinkedIn 上涨了 250%。</p>
+<p>但真正让我停下来想的，是另一个变化。非开发者，头一回以“构建者”身份进场了。</p>
+<p>Epic Games 一半以上的 Claude Code 使用，来自非开发者。Bolt.new 六七成的用户不是传统程序员，是设计师、学生、健身教练、销售、老师。有个叫 Skills 的东西，让一个完全不会写代码的人，10 分钟用 markdown 写出第一个 Agent 能力。</p>
+<p>“一人公司”从一种无奈，变成主动选的了。YC 那个创业营里，单枪匹马的创始人比例，一年从 23.7% 涨到 36.3%。Cursor 20 个人做到 1 亿美元年收入。Bolt.new 15 个人俩月做到 2000 万。</p>
+<p>十个人干一百个人的活，这话一年前还像吹牛，现在成日常了。</p>
+<p>但该泼的冷水还是要泼的，实际情况也不是那么乐观。报告里边自己也说了：非开发者撞上的那道“原型墙”，比专业的人还陡。没工程纪律的“一人公司”，维护成本能翻 4 倍。Skills 生态里 36% 的东西有安全缺陷。能力下放了，治理和审计的能力，反而更稀缺。</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+<figure class="">
+
+    <div class="img-container" style="--w: 1672; --h: 941;">
+        <img loading="lazy" alt="" src="/posts/2026-06-22-after-the-abundance/06-developer-redefined.png" width="1672" height="941">
+    </div>
+
+    
+</figure>
+</p>
+<hr>
+<h2 class="heading" id="读完之后">
+  读完之后
+  <a class="anchor" href="#%e8%af%bb%e5%ae%8c%e4%b9%8b%e5%90%8e">#</a>
+</h2>
+<p>说实话，这份报告我前后读了两遍，中间隔了几天。</p>
+<p>第一遍读完，觉得信息量很大，但有点散。第二遍再读，才发现它其实就在讲一件事——</p>
+<p>丰饶之后，稀缺没消失，它搬家了。</p>
+<p>从“写代码”，搬到了判断、验证、品味，还有把这一摊东西持续运转下去的工程纪律。</p>
+<p>报告结尾那句英文，说得很妙：</p>
+<blockquote>
+<p><em>After the abundance, what remains scarce is judgment, verification, taste, and the discipline to keep it running.</em></p></blockquote>
+<p>判断力，验证能力，品味，还有让它一直跑下去的纪律。</p>
+<p>这话不带任何煽情，但它让我后背有点凉。因为这四样东西，恰恰是 AI 最帮不了你的那几样。</p>
+<hr>
+<h2 class="heading" id="六个洞察可以概括成下面这张表">
+  六个洞察，可以概括成下面这张表
+  <a class="anchor" href="#%e5%85%ad%e4%b8%aa%e6%b4%9e%e5%af%9f%e5%8f%af%e4%bb%a5%e6%a6%82%e6%8b%ac%e6%88%90%e4%b8%8b%e9%9d%a2%e8%bf%99%e5%bc%a0%e8%a1%a8">#</a>
+</h2>
+<p>原报告有六条，前面挑着讲了一些。剩下没展开的，搁这张表里：</p>
+
+<div class="table-outer">
+    <table>
+        <thead>
+            <tr>
+                <th>报告原话</th>
+                <th>就是一句话</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>模型加速趋同，前沿差距不减</td>
+                <td>六大模型分数挤在 1 个点里；可那个不公开的 93.9% 在拉开储备差距</td>
+            </tr>
+            <tr>
+                <td>Agent 原生成为工具演化方向</td>
+                <td>工具形态变 Agent 编排，接口收敛到命令行+协议+Skills 三层</td>
+            </tr>
+            <tr>
+                <td>代码生成规模化，验证成新瓶颈</td>
+                <td>45% 的 AI 代码带已知漏洞，技术债务涨三四成</td>
+            </tr>
+            <tr>
+                <td>构建零门槛，品味运营稀缺</td>
+                <td>能做出来不等于能跑起来，原型墙卡掉一大批</td>
+            </tr>
+            <tr>
+                <td>SaaS 正被重新分配</td>
+                <td>中间套壳层被吃，两头壮大</td>
+            </tr>
+            <tr>
+                <td>开发者被双向重定义</td>
+                <td>做的事变了（编排而非编写），能做的人也变了（非开发者进场）</td>
+            </tr>
+        </tbody>
+    </table>
+</div><hr>
+<p><em>本文是对腾讯研究院《AI Coding 观察报告 2.0 —— 丰饶之后》的读后感，所有数据来自原报告。</em></p>
+
+    </div>
+  </article>
+
+  
+
+  
+
+  
+  
+
+<div class="single-pagination">
+    <hr />
+
+    <div class="flexnowrap">
+
+        <div class="single-pagination-prev">
+            
+            <div class="single-pagination-container-prev">
+                <div class="single-pagination-text">←</div>
+                <div class="single-pagination-text">
+                    <a href="/posts/2024-11-28-take-up-running/">
+                        十公里
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="single-pagination-next">
+            
+        </div>
+
+    </div>
+
+    <hr />
+</div>
+
+
+
+  
+
+  
+
+  
+  <div class="back-to-top">
+    <a href="#top">
+      back to top
+    </a>
+  </div>
+  
+
+</div>
+
+
+    </main>
+  </div>
+
+  
+  
+
+
+
+
+
+    
+
+
+
+
+  <footer>
+    
+
+    
+    
+
+
+
+
+
+    
+
+
+
+
+    
+    <p>Powered by
+        <a href="https://gohugo.io/">Hugo</a>
+        and
+        <a href="https://github.com/tomfran/typo">tomfran/typo</a>
+    </p>
+    
+    
+    
+
+
+  </footer>
+
+  
+</body>
+
+<script src="/js/theme-switch.js"></script>
+<script defer src="/js/copy-code.js"></script>
+</html>
