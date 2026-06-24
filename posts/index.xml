@@ -6,8 +6,15 @@
     <description>Recent content in Posts on </description>
     <generator>Hugo</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 18 Jun 2026 16:16:33 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 24 Jun 2026 16:45:00 +0800</lastBuildDate>
     <atom:link href="http://mylofi.fun/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>最后一关，还得由我出手</title>
+      <link>http://mylofi.fun/posts/the-last-checkpoint/</link>
+      <pubDate>Wed, 24 Jun 2026 16:45:00 +0800</pubDate>
+      <guid>http://mylofi.fun/posts/the-last-checkpoint/</guid>
+      <description>代码是 AI 写的，又快又稳，这活儿外包得出去。可它交回来的那一下是真经得起用，还是看着经得起用——这一下它说了不算，我说了算。没法外包，也不该外包。</description>
+    </item>
     <item>
       <title>丰饶之后：腾讯这份报告，让我陷入了深思</title>
       <link>http://mylofi.fun/posts/after-the-abundance/</link>
