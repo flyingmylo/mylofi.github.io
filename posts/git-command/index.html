@@ -59,7 +59,7 @@
 
 
 
-<link rel="stylesheet" href="/assets/combined.min.403fefeb55ad9a9e72af41abf4538457b584695b1fdcef661626b87d8b07dec9.css" media="all">
+<link rel="stylesheet" href="/assets/combined.min.a7696d162da1f65a6ca3e5d2e02a002b24b934c5c8f3526cd0b6fea6ef2f561c.css" media="all">
 
 
 
@@ -98,11 +98,7 @@
 
 
 
-
-
-
-
-<body class="auto">
+<body >
 
   <div class="content">
     <header>
@@ -151,22 +147,43 @@
     
     <div class="single-content">
       <p>新建本地分支并切换到新分支</p>
-<pre tabindex="0"><code>git checkout -b feat/abc
-</code></pre><p>本地分支推送到远程（x）</p>
-<pre tabindex="0"><code>git push origin feat/abc:feat/abc
-</code></pre><p>设置跟踪（y）</p>
-<pre tabindex="0"><code>git branch --set-upstream-to=origin/feat/abc feat/abc
-</code></pre><p>举例：如果想要把新建的 abc 本地分支推送到远程并建立跟踪，需要使用以上 x 和 y 两条命令，也可以使用以下一条命令：</p>
-<pre tabindex="0"><code>git push -u origin feat/abc
-</code></pre><p>删除本地分支</p>
-<pre tabindex="0"><code>git branch -d abc
-</code></pre><p>如果一个分支还没有被推送或合并，强制删除使用 -D</p>
-<pre tabindex="0"><code>git branch -D abc
-</code></pre><p>删除远程分支</p>
-<pre tabindex="0"><code>git push origin --delete abc
+<div class="code-block">
+  <pre tabindex="0"><code>git checkout -b feat/abc</code></pre>
+  <button class="copy-code-button">copy</button>
+</div>
+<p>本地分支推送到远程（x）</p>
+<div class="code-block">
+  <pre tabindex="0"><code>git push origin feat/abc:feat/abc</code></pre>
+  <button class="copy-code-button">copy</button>
+</div>
+<p>设置跟踪（y）</p>
+<div class="code-block">
+  <pre tabindex="0"><code>git branch --set-upstream-to=origin/feat/abc feat/abc</code></pre>
+  <button class="copy-code-button">copy</button>
+</div>
+<p>举例：如果想要把新建的 abc 本地分支推送到远程并建立跟踪，需要使用以上 x 和 y 两条命令，也可以使用以下一条命令：</p>
+<div class="code-block">
+  <pre tabindex="0"><code>git push -u origin feat/abc</code></pre>
+  <button class="copy-code-button">copy</button>
+</div>
+<p>删除本地分支</p>
+<div class="code-block">
+  <pre tabindex="0"><code>git branch -d abc</code></pre>
+  <button class="copy-code-button">copy</button>
+</div>
+<p>如果一个分支还没有被推送或合并，强制删除使用 -D</p>
+<div class="code-block">
+  <pre tabindex="0"><code>git branch -D abc</code></pre>
+  <button class="copy-code-button">copy</button>
+</div>
+<p>删除远程分支</p>
+<div class="code-block">
+  <pre tabindex="0"><code>git push origin --delete abc
 或 
-git push origin :abc
-</code></pre>
+git push origin :abc</code></pre>
+  <button class="copy-code-button">copy</button>
+</div>
+
     </div>
   </article>
 
@@ -276,6 +293,5 @@ git push origin :abc
   
 </body>
 
-<script src="/js/theme-switch.js"></script>
 <script defer src="/js/copy-code.js"></script>
 </html>

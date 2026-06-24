@@ -59,7 +59,7 @@
 
 
 
-<link rel="stylesheet" href="/assets/combined.min.403fefeb55ad9a9e72af41abf4538457b584695b1fdcef661626b87d8b07dec9.css" media="all">
+<link rel="stylesheet" href="/assets/combined.min.a7696d162da1f65a6ca3e5d2e02a002b24b934c5c8f3526cd0b6fea6ef2f561c.css" media="all">
 
 
 
@@ -98,11 +98,7 @@
 
 
 
-
-
-
-
-<body class="auto">
+<body >
 
   <div class="content">
     <header>
@@ -203,15 +199,21 @@
 
 <figure class="">
 
-    <div class="img-container" style="--w: 568; --h: 380;">
-        <img loading="lazy" alt="" src="/posts/dfs-bfs/dfs.png?width=50%22%e6%b7%b1%e5%ba%a6%e4%bc%98%e5%85%88%e6%90%9c%e7%b4%a2%22" width="568" height="380">
-    </div>
+    
+    
+      
+        <div class="img-container" style="--w: 568; --h: 380;">
+            <img loading="lazy" alt="" src="/posts/dfs-bfs/dfs.png?width=50%22%e6%b7%b1%e5%ba%a6%e4%bc%98%e5%85%88%e6%90%9c%e7%b4%a2%22" width="568" height="380">
+        </div>
+      
+    
 
     
 </figure>
 </p>
 <p>示例：通过 DFS 实现复制对象的复制</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="font-weight:bold;text-decoration:underline">const</span> copyDFS = <span style="font-weight:bold;font-style:italic;text-decoration:underline">function</span>(obj) {
+<div class="code-block">
+  <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="font-weight:bold;text-decoration:underline">const</span> copyDFS = <span style="font-weight:bold;font-style:italic;text-decoration:underline">function</span>(obj) {
 </span></span><span style="display:flex;"><span>  <span style="font-weight:bold;text-decoration:underline">if</span> (obj === <span style="font-weight:bold;text-decoration:underline">null</span> || <span style="font-weight:bold;text-decoration:underline">typeof</span> obj !== <span style="color:#666;font-style:italic">&#34;object&#34;</span>) {
 </span></span><span style="display:flex;"><span>    <span style="font-weight:bold;text-decoration:underline">return</span> obj;
 </span></span><span style="display:flex;"><span>  }
@@ -220,9 +222,12 @@
 </span></span><span style="display:flex;"><span>    copyObj[key] = copyDFS(obj[key]);
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>  <span style="font-weight:bold;text-decoration:underline">return</span> copyObj;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>示例：获取对象的所有键</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="font-weight:bold;text-decoration:underline">const</span> obj = { a: 1, b: 2, c: { d: 4, e: 5} }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+  <button class="copy-code-button">copy</button>
+</div>
+<p>示例：获取对象的所有键</p>
+<div class="code-block">
+  <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="font-weight:bold;text-decoration:underline">const</span> obj = { a: 1, b: 2, c: { d: 4, e: 5} }
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="font-weight:bold;font-style:italic;text-decoration:underline">function</span> dfs(obj, keys = []) {
 </span></span><span style="display:flex;"><span>  <span style="font-weight:bold;font-style:italic">Object</span>.entries(obj).forEach(([k, v]) =&gt; {
@@ -234,8 +239,10 @@
 </span></span><span style="display:flex;"><span>  <span style="font-weight:bold;text-decoration:underline">return</span> keys
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;, &#39;f&#39;]
-</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>console.log(dfs(obj))
-</span></span></code></pre></div><h3 class="heading" id="广度优先搜索-bfs">
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>console.log(dfs(obj))</span></span></code></pre></div>
+  <button class="copy-code-button">copy</button>
+</div>
+<h3 class="heading" id="广度优先搜索-bfs">
   广度优先搜索 BFS
   <a class="anchor" href="#%e5%b9%bf%e5%ba%a6%e4%bc%98%e5%85%88%e6%90%9c%e7%b4%a2-bfs">#</a>
 </h3>
@@ -258,9 +265,14 @@
 
 <figure class="">
 
-    <div class="img-container" style="--w: 572; --h: 380;">
-        <img loading="lazy" alt="" src="/posts/dfs-bfs/bfs.png?width=50%22%e5%b9%bf%e5%ba%a6%e4%bc%98%e5%85%88%e6%90%9c%e7%b4%a2%22" width="572" height="380">
-    </div>
+    
+    
+      
+        <div class="img-container" style="--w: 572; --h: 380;">
+            <img loading="lazy" alt="" src="/posts/dfs-bfs/bfs.png?width=50%22%e5%b9%bf%e5%ba%a6%e4%bc%98%e5%85%88%e6%90%9c%e7%b4%a2%22" width="572" height="380">
+        </div>
+      
+    
 
     
 </figure>
@@ -289,7 +301,8 @@
 <li>重复步骤 2</li>
 </ol>
 <p>示例：通过 DFS 实现对象深拷贝：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="font-weight:bold;font-style:italic;text-decoration:underline">function</span> deepCopy(obj) {
+<div class="code-block">
+  <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="font-weight:bold;font-style:italic;text-decoration:underline">function</span> deepCopy(obj) {
 </span></span><span style="display:flex;"><span>  <span style="font-weight:bold;text-decoration:underline">const</span> queue = [obj]
 </span></span><span style="display:flex;"><span>  <span style="font-weight:bold;text-decoration:underline">const</span> newObject = {}
 </span></span><span style="display:flex;"><span>
@@ -317,6 +330,9 @@
 </span></span><span style="display:flex;"><span>console.log(copy) <span style="color:#888;font-style:italic">// {a: 3, b: 2}
 </span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>console.log(copy === obj) <span style="color:#888;font-style:italic">// false
 </span></span></span></code></pre></div>
+  <button class="copy-code-button">copy</button>
+</div>
+
     </div>
   </article>
 
@@ -426,6 +442,5 @@
   
 </body>
 
-<script src="/js/theme-switch.js"></script>
 <script defer src="/js/copy-code.js"></script>
 </html>
