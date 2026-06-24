@@ -9,11 +9,11 @@
     <lastBuildDate>Wed, 24 Jun 2026 16:45:00 +0800</lastBuildDate>
     <atom:link href="http://mylofi.fun/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>最后一关，还得由我出手</title>
+      <title>把代码交给 AI 以后，我发现最不能交出去的是自己</title>
       <link>http://mylofi.fun/posts/the-last-checkpoint/</link>
       <pubDate>Wed, 24 Jun 2026 16:45:00 +0800</pubDate>
       <guid>http://mylofi.fun/posts/the-last-checkpoint/</guid>
-      <description>代码是 AI 写的，又快又稳，这活儿外包得出去。可它交回来的那一下是真经得起用，还是看着经得起用——这一下它说了不算，我说了算。没法外包，也不该外包。</description>
+      <description>AI 正在接管越来越多的编码工作，但真正决定结果的，并不是“让 AI 做什么”，而是人是否还能定义意图、判断质量、承担结果。当代码不再需要亲手一行行写下，程序员真正需要守住的，可能是中间那一次判断和最后那一次验收。</description>
     </item>
     <item>
       <title>丰饶之后：腾讯这份报告，让我陷入了深思</title>
