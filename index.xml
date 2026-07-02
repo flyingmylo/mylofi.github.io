@@ -6,8 +6,15 @@
     <description>Recent content in Home on </description>
     <generator>Hugo</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 24 Jun 2026 16:45:00 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 29 Jun 2026 23:30:00 +0800</lastBuildDate>
     <atom:link href="http://mylofi.fun/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>读完 DeepSeek 这篇推理加速论文，我满脑子只剩一句话：好钢用在刀刃上</title>
+      <link>http://mylofi.fun/posts/dspark-no-peeking/</link>
+      <pubDate>Mon, 29 Jun 2026 23:30:00 +0800</pubDate>
+      <guid>http://mylofi.fun/posts/dspark-no-peeking/</guid>
+      <description>没被 DSpark 的调度打动，被它守的那条”不能偷看”的规矩打动了。工程里有些约束是护身符，不是镣铐。</description>
+    </item>
     <item>
       <title>把代码交给 AI 以后，我发现最不能交出去的是自己</title>
       <link>http://mylofi.fun/posts/the-last-checkpoint/</link>

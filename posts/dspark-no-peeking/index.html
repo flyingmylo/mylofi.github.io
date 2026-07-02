@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+  dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+<link rel="icon" type="image/ico" href="http://mylofi.fun/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://mylofi.fun/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://mylofi.fun/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="http://mylofi.fun/android-chrome-192x192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="http://mylofi.fun/apple-touch-icon.png">
+
+<meta name="description" content=""/>
+
+
+
+<title>
+    
+    读完 DeepSeek 这篇推理加速论文，我满脑子只剩一句话：好钢用在刀刃上 | 
+    
+</title>
+
+<link rel="canonical" href="http://mylofi.fun/posts/dspark-no-peeking/"/>
+
+<meta property="og:url" content="http://mylofi.fun/posts/dspark-no-peeking/">
+  <meta property="og:title" content="读完 DeepSeek 这篇推理加速论文，我满脑子只剩一句话：好钢用在刀刃上">
+  <meta property="og:description" content="没被 DSpark 的调度打动，被它守的那条”不能偷看”的规矩打动了。工程里有些约束是护身符，不是镣铐。">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-06-29T23:30:00+08:00">
+    <meta property="article:modified_time" content="2026-06-29T23:30:00+08:00">
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/assets/combined.min.a7696d162da1f65a6ca3e5d2e02a002b24b934c5c8f3526cd0b6fea6ef2f561c.css" media="all">
+
+
+
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-xxxxxxxxx"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-xxxxxxxxx');
+        }
+      </script>
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+</head>
+
+
+
+<body >
+
+  <div class="content">
+    <header>
+      
+
+<div class="header">
+
+    
+
+</div>
+
+    </header>
+
+    <main class="main">
+      
+
+
+
+
+<div class="breadcrumbs"><a href="/">Home</a><span class="breadcrumbs-separator">/</span><a href="/posts/">Posts</a><span class="breadcrumbs-separator">/</span>
+        <a href="/posts/dspark-no-peeking/">读完 DeepSeek 这篇推理加速论文，我满脑子只剩一句话：好钢用在刀刃上</a></div>
+
+
+<div >
+  <article>
+    <header class="single-intro-container">
+        
+        <h1 class="single-title">读完 DeepSeek 这篇推理加速论文，我满脑子只剩一句话：好钢用在刀刃上</h1>
+        <p class="single-summary">没被 DSpark 的调度打动，被它守的那条”不能偷看”的规矩打动了。工程里有些约束是护身符，不是镣铐。</p>
+        
+        <div class="single-subsummary">
+          
+          <div>
+            
+            <p class="single-date">
+              <time datetime="2026-06-29T23:30:00&#43;08:00">2026-06-29</time>
+            </p>
+          </div>
+        </div>
+        
+    </header>
+    
+    <div class="single-content">
+      <p>前两天看到 DeepSeek 和北大合发了一篇《DSpark》。名字取得挺抽象，但做的事很实在——<strong>让大模型回答问题更快。</strong></p>
+<p>33 页，读了我两个傍晚。合上 PDF 之后最大的感受，不是什么「又一篇顶会大作」，而是一个朴素到有点俗的理：</p>
+<p>把算力用对地方，比堆更多算力值钱太多了。</p>
+<hr>
+<h3 class="heading" id="大模型为什么一个字一个字往外蹦">
+  大模型为什么一个字一个字往外蹦？
+  <a class="anchor" href="#%e5%a4%a7%e6%a8%a1%e5%9e%8b%e4%b8%ba%e4%bb%80%e4%b9%88%e4%b8%80%e4%b8%aa%e5%ad%97%e4%b8%80%e4%b8%aa%e5%ad%97%e5%be%80%e5%a4%96%e8%b9%a6">#</a>
+</h3>
+<p>用 ChatGPT 或者 DeepSeek 的时候，我们都经历过那种感觉：光标一闪一闪，字一颗一颗往外弹。不是模型故意磨蹭，是它的工作机制就这样——自回归生成，每出一个字，必须把前面所有字重新读一遍。</p>
+<p>100 字的回答，跑 100 趟完整计算。GPU 忙得脚不沾地，利用率还低得可怜。</p>
+<p>业界折腾出一个办法，叫「推测解码」（Speculative Decoding）。思路很直：<strong>让一个小模型先把答案猜出来，大模型再一次性校对。</strong> 前面猜对了就留着，猜错了后面的就扔掉重来。</p>
+<p>好比写作文先打草稿再誊——草稿越靠谱，誊得越快。</p>
+<hr>
+<h3 class="heading" id="两派打架谁都没赢">
+  两派打架，谁都没赢
+  <a class="anchor" href="#%e4%b8%a4%e6%b4%be%e6%89%93%e6%9e%b6%e8%b0%81%e9%83%bd%e6%b2%a1%e8%b5%a2">#</a>
+</h3>
+<p>草稿怎么打？两派人吵了好几年。</p>
+<p>一派老老实实，一字一字来。每个字都参照前一个，质量稳得很。代表是 Eagle3。可问题也在这儿：写 7 个字的草稿要跑 7 次计算。你草稿还没打完，誊写省的那点时间早赔出去了。</p>
+<p>另一派就不客气了，一口气把所有位置同时填满，只跑一次计算。代表是 DFlash。快是真快，但准确率随位置暴跌。因为没有字与字之间的关联，写出来的东西经常精神分裂——比如「of course」和「no problem」，并行模型可能拼出「of problem」。每个字单独看都没毛病，连起来就是个灾难。</p>
+<p><strong>快的不准，准的不快。</strong> 就尬在这儿。</p>
+<hr>
+<h3 class="heading" id="dspark-的办法两边的便宜都占">
+  DSpark 的办法：两边的便宜都占
+  <a class="anchor" href="#dspark-%e7%9a%84%e5%8a%9e%e6%b3%95%e4%b8%a4%e8%be%b9%e7%9a%84%e4%be%bf%e5%ae%9c%e9%83%bd%e5%8d%a0">#</a>
+</h3>
+<p>DeepSeek 团队的想法很贼：既然并行快、自回归准，能不能各取所长？</p>
+<p>他们搞了个「半自回归」架构，听着高深，拆开看就两层：</p>
+<ul>
+<li>主干继续并行跑，大块计算一步到位，速度不掉；</li>
+<li>尾巴接一个极轻的串行模块，只干一件事：前一个字出来后，把下一个字的概率微调一下。比如已经写出了「of」，它就帮「course」加点分，给「problem」降降温。</li>
+</ul>
+<p>这个尾巴轻到什么程度？论文里的测试数据是，整个起草过程只比纯并行慢了 0.2% 到 1.3%。但 <strong>最终被大模型认可的字数涨了 16% 到 30%。</strong></p>
+<p>几乎不花钱，效果明显变好。这种事谁都喜欢。</p>
+<hr>
+<h3 class="heading" id="第二个暗坑验证">
+  第二个暗坑：验证
+  <a class="anchor" href="#%e7%ac%ac%e4%ba%8c%e4%b8%aa%e6%9a%97%e5%9d%91%e9%aa%8c%e8%af%81">#</a>
+</h3>
+<p>草稿写得好是第一步。但如果每个字都老老实实送到大模型面前查一遍，照样不划算。尤其是在上万人同时用的场景下，验证算力是稀缺资源。</p>
+<p>论文里有个特别反常识的结论：<strong>闭着眼睛把所有草稿字都验一遍，整体吞吐反而会掉。</strong></p>
+<p>为什么？不是所有请求都一样。代码类的东西，结构固定，草稿准确率天生高。闲聊就完全是另一码事了，发散性强，靠后的字十有八九要被毙掉。一刀切地全验，等于在闲聊的时候拿宝贵的算力去赌几乎确定的失败。</p>
+<p>所以 DSpark 又做了一件事：<strong>让模型自己评估每个草稿位置有多靠谱</strong>——论文里叫「自信头」（confidence head）。然后结合当前系统到底忙不忙，动态决定这次该验多长。</p>
+<p>闲的时候，多验几个又不亏。忙的时候，只验最有把握的前缀，后面的直接砍。</p>
+<p>这不就是餐厅的逻辑吗？没人的时候你翻菜单翻十分钟没事，满座的时候服务员恨不得你三秒点完。资源怎么分，得看压力。</p>
+<hr>
+<h3 class="heading" id="上线后的数字比论文本身更有说服力">
+  上线后的数字，比论文本身更有说服力
+  <a class="anchor" href="#%e4%b8%8a%e7%ba%bf%e5%90%8e%e7%9a%84%e6%95%b0%e5%ad%97%e6%af%94%e8%ae%ba%e6%96%87%e6%9c%ac%e8%ba%ab%e6%9b%b4%e6%9c%89%e8%af%b4%e6%9c%8d%e5%8a%9b">#</a>
+</h3>
+<p>最让我心里咯噔一下的，是生产环境的数据。</p>
+<p>DSpark 已经跑在 DeepSeek-V4 的 Flash 和 Pro 两个线上版本了，替代了之前的 MTP-1。真实用户流量下：</p>
+<ul>
+<li><strong>V4-Flash：</strong> 每人每秒生成速度提了 60%–85%；</li>
+<li><strong>V4-Pro：</strong> 提了 57%–78%。</li>
+</ul>
+<p>可更狠的不是这些百分比，是论文里那张吞吐—响应速度的图。</p>
+<p>老办法 MTP-1，在高交互需求下（比如要求每秒给用户 120 个 token），并发量直接雪崩。几乎没法用。DSpark 把这个边界往外推了不止一档——以前那块地方是空的，现在可以站上去了。</p>
+<p>不是优化，是解锁。</p>
+<hr>
+<h2 class="heading" id="读完之后几点零散的想法">
+  读完之后几点零散的想法
+  <a class="anchor" href="#%e8%af%bb%e5%ae%8c%e4%b9%8b%e5%90%8e%e5%87%a0%e7%82%b9%e9%9b%b6%e6%95%a3%e7%9a%84%e6%83%b3%e6%b3%95">#</a>
+</h2>
+<p>第一，DSpark 没造更大的模型，没堆更多的卡。做的事情说白了就是「半自回归 + 动态调度」两步棋，但每一步都掐在要害上。这让我想起很多年前有人说过：最好的工程不是没有约束，是在约束里找到最巧的解法。</p>
+<p>第二，「浪费」和「节省」是同一个东西的两面。低负载时可以撒一点验证算力赌更高的速度；高负载下每一份都得精打细算。好的系统不是一刀切的「省」，是随压力自动变形。</p>
+<p>第三，开源这事确实加分。DeepSeek 这次不光发了论文，还把 DSpark 的 checkpoints 和训练框架 DeepSpec 全放出来了。这意味着社区做推理加速研究的人不用重复造轮子，直接站肩膀上往下走。这种姿态比发论文本身更难得。</p>
+<hr>
+<h2 class="heading" id="跟你有什么关系">
+  跟你有什么关系？
+  <a class="anchor" href="#%e8%b7%9f%e4%bd%a0%e6%9c%89%e4%bb%80%e4%b9%88%e5%85%b3%e7%b3%bb">#</a>
+</h2>
+<p>你大概率不会去读「推测解码」或「Pareto 前沿」，但这个事离你一点不远。</p>
+<p>现在问 AI 一个问题，等几秒甚至十几秒才看到完整回答，是常态。DSpark 这类技术干的事就是在改这个常态：<strong>等待越来越短，体验越来越顺。</strong></p>
+<p>而且推理成本一下来，很多以前「太贵搞不定」的场景就成立——实时语音代理、长期代码协作、多轮深度推演，这些都需要速度和成本同时达标。</p>
+<p><strong>技术多数时候在你看不到的地方进步，但你能感觉到它。</strong></p>
+<p>手机从 3G 换 4G 再换 5G，你没有去研究基站用了什么调制，但不卡了、画质清了——你能感觉得到，DSpark 也一样。</p>
+<hr>
+
+    </div>
+  </article>
+
+  
+
+  
+
+  
+  
+
+<div class="single-pagination">
+    <hr />
+
+    <div class="flexnowrap">
+
+        <div class="single-pagination-prev">
+            
+            <div class="single-pagination-container-prev">
+                <div class="single-pagination-text">←</div>
+                <div class="single-pagination-text">
+                    <a href="/posts/the-last-checkpoint/">
+                        把代码交给 AI 以后，我发现最不能交出去的是自己
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="single-pagination-next">
+            
+        </div>
+
+    </div>
+
+    <hr />
+</div>
+
+
+
+  
+
+  
+
+  
+  <div class="back-to-top">
+    <a href="#top">
+      back to top
+    </a>
+  </div>
+  
+
+</div>
+
+
+    </main>
+  </div>
+
+  
+  
+
+
+
+
+
+    
+
+
+
+
+  <footer>
+    
+
+    
+    
+
+
+
+
+
+    
+
+
+
+
+    
+    <p>Powered by
+        <a href="https://gohugo.io/">Hugo</a>
+        and
+        <a href="https://github.com/tomfran/typo">tomfran/typo</a>
+    </p>
+    
+    
+    
+
+
+  </footer>
+
+  
+</body>
+
+<script defer src="/js/copy-code.js"></script>
+</html>
